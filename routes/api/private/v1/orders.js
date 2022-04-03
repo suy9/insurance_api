@@ -30,18 +30,6 @@ router.get("/",
 		if(req.query.pay_status) {
 			conditions["pay_status"] = req.query.pay_status;
 		}
-		if(req.query.is_send) {
-			conditions["is_send"] = req.query.is_send;
-		}
-		if(req.query.order_fapiao_company) {
-			conditions["order_fapiao_company"] = req.query.order_fapiao_company;
-		}
-		if(req.query.order_fapiao_content) {
-			conditions["order_fapiao_content"] = req.query.order_fapiao_content;
-		}
-		if(req.query.consignee_addr) {
-			conditions["consignee_addr"] = req.query.consignee_addr;
-		}
 
 		orderServ.getAllOrders(
 			conditions,

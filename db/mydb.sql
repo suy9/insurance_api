@@ -1,18 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : localhost_3306
-Source Server Version : 50553
-Source Host           : localhost:3306
-Source Database       : mydb
-
-Target Server Type    : MYSQL
-Target Server Version : 50553
-File Encoding         : 65001
-
-Date: 2018-04-14 16:25:28
-*/
-
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
@@ -284,38 +269,29 @@ VALUES ('500', 'admin', '123456', '1486720211', '0', '12345678', 'adsfad@qq.com'
 DROP TABLE IF EXISTS `sp_order`;
 CREATE TABLE `sp_order`
 (
-    `order_id`       int(10) unsigned       NOT NULL AUTO_INCREMENT COMMENT '主键id',
-    `user_id`        mediumint(8) unsigned  NOT NULL COMMENT '下订单会员id',
-    `order_number`   varchar(32)            NOT NULL COMMENT '订单编号',
-    `order_price`    decimal(10, 2)         NOT NULL DEFAULT '0.00' COMMENT '订单总金额',
-    `order_pay`      enum ('0','1','2','3') NOT NULL DEFAULT '1' COMMENT '支付方式  0未支付 1支付宝  2微信  3银行卡',
-    `is_send`        enum ('是','否')         NOT NULL DEFAULT '否' COMMENT '订单是否已经发货',
-    `trade_no`       varchar(32)            NOT NULL DEFAULT '' COMMENT '支付宝交易流水号码',
-    `consignee_addr` text                   NOT NULL COMMENT 'consignee收货人地址',
-    `pay_status`     enum ('0','1')         NOT NULL DEFAULT '0' COMMENT '订单状态： 0未付款、1已付款',
-    `create_time`    int(10) unsigned       NOT NULL COMMENT '记录生成时间',
-    `update_time`    int(10) unsigned       NOT NULL COMMENT '记录修改时间',
+    `order_id`     int(10) unsigned       NOT NULL AUTO_INCREMENT COMMENT '主键id',
+    `user_id`      mediumint(8) unsigned  NOT NULL COMMENT '投保人id',
+    `seller_id`    mediumint(8) unsigned  NOT NULL COMMENT '被投保人id',
+    `order_number` varchar(32)            NOT NULL COMMENT '订单编号',
+    `order_price`  decimal(10, 2)         NOT NULL DEFAULT '0.00' COMMENT '订单总金额',
+    `order_pay`    enum ('0','1','2','3') NOT NULL DEFAULT '1' COMMENT '支付方式  0未支付 1支付宝  2微信  3银行卡',
+    `pay_status`   enum ('0','1')         NOT NULL DEFAULT '0' COMMENT '订单状态： 0未付款、1已付款',
+    `create_time`  int(10) unsigned       NOT NULL COMMENT '记录生成时间',
+    `update_time`  int(10) unsigned       NOT NULL COMMENT '记录修改时间',
     PRIMARY KEY (`order_id`),
     UNIQUE KEY `order_number` (`order_number`),
     KEY `add_time` (`create_time`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 69
+  AUTO_INCREMENT = 50
   DEFAULT CHARSET = utf8 COMMENT ='订单表';
 
 -- ----------------------------
 -- Records of sp_order
 -- ----------------------------
 INSERT INTO `sp_order`
-VALUES ('42', '133', 'itcast-59e411eaaccc9', '222.00', '2', '否', '', '2', '0', '1508119018',
-        '1508119018');
+VALUES ('22', '1', '1', 'itcast-59e411eaaccc9', '222.00', '2', '1', '1508119018', '1508119018');
 INSERT INTO `sp_order`
-VALUES ('43', '224', 'itcast-59e71b546d30a', '805.00', '1', '否', '',
-        'a:7:{s:6:\"cgn_id\";i:3;s:7:\"user_id\";i:224;s:8:\"cgn_name\";s:6:\"鸭蛋\";s:11:\"cgn_address\";s:59:\"北京市海淀区西三旗建材城西路中腾大厦15室\";s:7:\"cgn_tel\";s:11:\"18902564321\";s:8:\"cgn_code\";s:6:\"600214\";s:11:\"delete_time\";N;}',
-        '0', '1508318036', '1508318036');
-INSERT INTO `sp_order`
-VALUES ('44', '133', 'itcast-59e74f99b2fc5', '322.00', '1', '否', '',
-        'a:7:{s:6:\"cgn_id\";i:1;s:7:\"user_id\";i:133;s:8:\"cgn_name\";s:9:\"王二柱\";s:11:\"cgn_address\";s:51:\"北京市海淀区苏州街长远天地大厦305室\";s:7:\"cgn_tel\";s:11:\"13566771298\";s:8:\"cgn_code\";s:6:\"306810\";s:11:\"delete_time\";N;}',
-        '0', '1508331417', '1508331417');
+VALUES ('23', '2', '2', 'itcast-59e71b546d30a', '805.00', '0', '0', '1508318036', '1508318036');
 
 -- ----------------------------
 -- Table structure for sp_order_goods
@@ -980,21 +956,20 @@ VALUES ('4', '电影', null);
 DROP TABLE IF EXISTS `sp_user`;
 CREATE TABLE `sp_user`
 (
-    `user_id`         int(11)                                   NOT NULL AUTO_INCREMENT COMMENT '自增id',
-    `username`        varchar(128)                              NOT NULL DEFAULT '' COMMENT '登录名',
-    `qq_open_id`      char(32)                                           DEFAULT NULL COMMENT 'qq官方唯一编号信息',
-    `password`        char(64)                                  NOT NULL DEFAULT '' COMMENT '登录密码',
-    `user_email`      varchar(64)                               NOT NULL DEFAULT '' COMMENT '邮箱',
-    `user_email_code` char(13)                                           DEFAULT NULL COMMENT '新用户注册邮件激活唯一校验码',
-    `is_active`       enum ('是','否')                                     DEFAULT '否' COMMENT '新用户是否已经通过邮箱激活帐号',
-    `user_sex`        enum ('保密','女','男')                       NOT NULL DEFAULT '男' COMMENT '性别',
-    `user_qq`         varchar(32)                               NOT NULL DEFAULT '' COMMENT 'qq',
-    `user_tel`        varchar(32)                               NOT NULL DEFAULT '' COMMENT '手机',
-    `user_xueli`      enum ('博士','硕士','本科','专科','高中','初中','小学') NOT NULL DEFAULT '本科' COMMENT '学历',
-    `user_hobby`      varchar(32)                               NOT NULL DEFAULT '' COMMENT '爱好',
-    `user_introduce`  text COMMENT '简介',
-    `create_time`     int(11)                                   NOT NULL COMMENT '创建时间',
-    `update_time`     int(11)                                   NOT NULL COMMENT '修改时间',
+    `user_id`      int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
+    `user_num`     varchar(255)     NOT NULL COMMENT '投保人身份证号',
+    `user_name`    varchar(255)     NOT NULL COMMENT '投保人姓名',
+    `user_birt`    date             NOT NULL COMMENT '投保人生日',
+    `user_address` varchar(255)     NOT NULL COMMENT '投保人地址',
+    `user_phone`   int(11)          NOT NULL COMMENT '投保人电话',
+    `username`     varchar(128)     NOT NULL                 DEFAULT '' COMMENT '登录名',
+    `password`     char(64)         NOT NULL                 DEFAULT '' COMMENT '登录密码',
+    `user_email`   varchar(64)      NOT NULL                 DEFAULT '' COMMENT '邮箱',
+    `user_sex`     enum ('女','男')   NOT NULL COMMENT '性别',
+    `user_qq`      varchar(32)                               DEFAULT '' COMMENT 'qq',
+    `user_edu`     enum ('博士','硕士','本科','专科','高中','初中','小学') DEFAULT NULL COMMENT '学历',
+    `create_time`  int(11)          NOT NULL COMMENT '创建时间',
+    `update_time`  int(11)          NOT NULL COMMENT '修改时间',
     PRIMARY KEY (`user_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 12
@@ -1004,11 +979,47 @@ CREATE TABLE `sp_user`
 -- Records of sp_user
 -- ----------------------------
 INSERT INTO `sp_user`
-VALUES ('1', 'zce', null, '$2a$08$lV0Gr4AKx7xH7cCU4KCGCOikNzGPaWIpw9W7A9BONIxoJ2.hGC9qi', 'w@zce.me', '1242d9b5', '否',
-        '男', '', '', '本科', '', null, '1512033129', '1512033129');
+VALUES ('1', '310101198710279976', '胡超', '1987-10-27', '上海市', '18789276493',
+        'user_test1', '123321', 'w@zce.me', '男', null, '本科', '1512033129', '1512033129');
 INSERT INTO `sp_user`
-VALUES ('11', 'ww', null, '$2a$08$09nUxs.9czzXc4JZJTOdteeXSd/mxZVg96AhqciGbTMB6cfbGUWC2', 'i@zce.me', 'f9a9d0cc', '是',
-        '女', '1231231211', '12313211', '博士', '123123', '123123123', '1512122098', '1512122098');
+VALUES ('2', '31010119910722661X', '陈冬', '1986-11-05', '上海市', '18763524951',
+        'user_test2', 'zzzzzz', 'asd@asd.cc', '男', '1000001', '博士', '1512122098', '1512122098');
+
+-- ----------------------------
+-- Table structure for sp_seller
+-- ----------------------------
+DROP TABLE IF EXISTS `sp_seller`;
+CREATE TABLE `sp_seller`
+(
+    `seller_id`      int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
+    `seller_num`     varchar(255)     NOT NULL COMMENT '投保人身份证号',
+    `seller_name`    varchar(255)     NOT NULL COMMENT '投保人姓名',
+    `seller_birt`    date             NOT NULL COMMENT '投保人生日',
+    `seller_address` varchar(255)     NOT NULL COMMENT '投保人地址',
+    `seller_phone`   int(11)          NOT NULL COMMENT '投保人电话',
+    `username`     varchar(128)     NOT NULL                 DEFAULT '' COMMENT '登录名',
+    `password`     char(64)         NOT NULL                 DEFAULT '' COMMENT '登录密码',
+    `seller_email`   varchar(64)      NOT NULL                 DEFAULT '' COMMENT '邮箱',
+    `seller_sex`     enum ('女','男')   NOT NULL COMMENT '性别',
+    `seller_qq`      varchar(32)                               DEFAULT '' COMMENT 'qq',
+    `seller_edu`     enum ('博士','硕士','本科','专科','高中','初中','小学') DEFAULT NULL COMMENT '学历',
+    `create_time`  int(11)          NOT NULL COMMENT '创建时间',
+    `update_time`  int(11)          NOT NULL COMMENT '修改时间',
+    PRIMARY KEY (`seller_id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 12
+  DEFAULT CHARSET = utf8 COMMENT ='会员表';
+
+-- ----------------------------
+-- Records of sp_user
+-- ----------------------------
+INSERT INTO `sp_user`
+VALUES ('1', '31010119910722661X', '占徐平', '1991-07-22', '上海市', '15365849214',
+        'seller_test1', '123321', 'sad@dd.me', '男', null, '本科', '1512233129', '1512333129');
+INSERT INTO `sp_user`
+VALUES ('2', '31010119910722661X', '陈冬', '1986-11-05', '上海市', '18763524951',
+        'seller_test2', 'zzzzzz', 'afff@qrw.cc', '男', '1000001', '博士', '1512124098', '1512126098');
+
 
 -- ----------------------------
 -- Table structure for sp_user_cart
