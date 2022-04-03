@@ -956,20 +956,20 @@ VALUES ('4', '电影', null);
 DROP TABLE IF EXISTS `sp_user`;
 CREATE TABLE `sp_user`
 (
-    `user_id`      int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
-    `user_num`     varchar(255)     NOT NULL COMMENT '投保人身份证号',
-    `user_name`    varchar(255)     NOT NULL COMMENT '投保人姓名',
-    `user_birt`    date             NOT NULL COMMENT '投保人生日',
-    `user_address` varchar(255)     NOT NULL COMMENT '投保人地址',
-    `user_phone`   int(11)          NOT NULL COMMENT '投保人电话',
-    `username`     varchar(128)     NOT NULL                 DEFAULT '' COMMENT '登录名',
-    `password`     char(64)         NOT NULL                 DEFAULT '' COMMENT '登录密码',
-    `user_email`   varchar(64)      NOT NULL                 DEFAULT '' COMMENT '邮箱',
-    `user_sex`     enum ('女','男')   NOT NULL COMMENT '性别',
-    `user_qq`      varchar(32)                               DEFAULT '' COMMENT 'qq',
-    `user_edu`     enum ('博士','硕士','本科','专科','高中','初中','小学') DEFAULT NULL COMMENT '学历',
-    `create_time`  int(11)          NOT NULL COMMENT '创建时间',
-    `update_time`  int(11)          NOT NULL COMMENT '修改时间',
+    `user_id`       int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
+    `user_num`      varchar(255)     NOT NULL COMMENT '投保人身份证号',
+    `user_name`     varchar(255)     NOT NULL COMMENT '投保人姓名',
+    `user_birthday` date             NOT NULL COMMENT '投保人生日',
+    `user_address`  varchar(255)     NOT NULL COMMENT '投保人地址',
+    `user_phone`    varchar(12)      NOT NULL COMMENT '投保人电话',
+    `username`      varchar(128)     NOT NULL                 DEFAULT '' COMMENT '登录名',
+    `password`      char(64)         NOT NULL                 DEFAULT '' COMMENT '登录密码',
+    `user_email`    varchar(64)      NOT NULL                 DEFAULT '' COMMENT '邮箱',
+    `user_sex`      enum ('女','男')   NOT NULL COMMENT '性别',
+    `user_qq`       varchar(32)                               DEFAULT '' COMMENT 'qq',
+    `user_edu`      enum ('博士','硕士','本科','专科','高中','初中','小学') DEFAULT NULL COMMENT '学历',
+    `create_time`   int(11)          NOT NULL COMMENT '创建时间',
+    `update_time`   int(11)          NOT NULL COMMENT '修改时间',
     PRIMARY KEY (`user_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 12
@@ -991,20 +991,20 @@ VALUES ('2', '31010119910722661X', '陈冬', '1986-11-05', '上海市', '1876352
 DROP TABLE IF EXISTS `sp_seller`;
 CREATE TABLE `sp_seller`
 (
-    `seller_id`      int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
-    `seller_num`     varchar(255)     NOT NULL COMMENT '投保人身份证号',
-    `seller_name`    varchar(255)     NOT NULL COMMENT '投保人姓名',
-    `seller_birt`    date             NOT NULL COMMENT '投保人生日',
-    `seller_address` varchar(255)     NOT NULL COMMENT '投保人地址',
-    `seller_phone`   int(11)          NOT NULL COMMENT '投保人电话',
-    `username`     varchar(128)     NOT NULL                 DEFAULT '' COMMENT '登录名',
-    `password`     char(64)         NOT NULL                 DEFAULT '' COMMENT '登录密码',
-    `seller_email`   varchar(64)      NOT NULL                 DEFAULT '' COMMENT '邮箱',
-    `seller_sex`     enum ('女','男')   NOT NULL COMMENT '性别',
-    `seller_qq`      varchar(32)                               DEFAULT '' COMMENT 'qq',
-    `seller_edu`     enum ('博士','硕士','本科','专科','高中','初中','小学') DEFAULT NULL COMMENT '学历',
-    `create_time`  int(11)          NOT NULL COMMENT '创建时间',
-    `update_time`  int(11)          NOT NULL COMMENT '修改时间',
+    `seller_id`       int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
+    `seller_num`      varchar(255)     NOT NULL COMMENT '被投保人身份证号',
+    `seller_name`     varchar(255)     NOT NULL COMMENT '被投保人姓名',
+    `seller_birthday` date             NOT NULL COMMENT '被投保人生日',
+    `seller_address`  varchar(255)     NOT NULL COMMENT '被投保人地址',
+    `seller_phone`    varchar(12)      NOT NULL COMMENT '被投保人电话',
+    `username`        varchar(128)     NOT NULL                 DEFAULT '' COMMENT '登录名',
+    `password`        char(64)         NOT NULL                 DEFAULT '' COMMENT '登录密码',
+    `seller_email`    varchar(64)      NOT NULL                 DEFAULT '' COMMENT '邮箱',
+    `seller_sex`      enum ('女','男')   NOT NULL COMMENT '性别',
+    `seller_qq`       varchar(32)                               DEFAULT '' COMMENT 'qq',
+    `seller_edu`      enum ('博士','硕士','本科','专科','高中','初中','小学') DEFAULT NULL COMMENT '学历',
+    `create_time`     int(11)          NOT NULL COMMENT '创建时间',
+    `update_time`     int(11)          NOT NULL COMMENT '修改时间',
     PRIMARY KEY (`seller_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 12
@@ -1013,10 +1013,10 @@ CREATE TABLE `sp_seller`
 -- ----------------------------
 -- Records of sp_user
 -- ----------------------------
-INSERT INTO `sp_user`
+INSERT INTO `sp_seller`
 VALUES ('1', '31010119910722661X', '占徐平', '1991-07-22', '上海市', '15365849214',
         'seller_test1', '123321', 'sad@dd.me', '男', null, '本科', '1512233129', '1512333129');
-INSERT INTO `sp_user`
+INSERT INTO `sp_seller`
 VALUES ('2', '31010119910722661X', '陈冬', '1986-11-05', '上海市', '18763524951',
         'seller_test2', 'zzzzzz', 'afff@qrw.cc', '男', '1000001', '博士', '1512124098', '1512126098');
 

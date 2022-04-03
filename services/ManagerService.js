@@ -1,6 +1,5 @@
 var path = require("path");
 var managersDAO = require(path.join(process.cwd(), "dao/ManagerDAO"));
-var Password = require("node-php-password");
 var logger = require('../modules/logger').logger();
 
 

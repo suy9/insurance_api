@@ -4,7 +4,7 @@ module.exports = function (db, callback) {
         user_id: {type: 'serial', key: true},
         user_num: String,
         user_name: String,
-        user_birt: Date,
+        user_birthday: Date,
         user_address: String,
         user_phone: Number,
         username: String,

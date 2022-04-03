@@ -4,7 +4,7 @@ databaseModule = require(path.join(process.cwd(),"modules/database"));
 
 /**
  * 创建管理员
- * 
+ *
  * @param  {[type]}   obj 管理员信息
  * @param  {Function} cb  回调函数
  */
@@ -14,7 +14,7 @@ module.exports.create = function(obj,cb) {
 
 /**
  * 获取管理员列表
- * 
+ *
  * @param  {[type]}   conditions 查询条件
  * @param  {Function} cb         回调函数
  */
@@ -27,7 +27,7 @@ module.exports.list = function(conditions,cb) {
 
 /**
  * 通过查询条件获取管理员对象
- * 
+ *
  * @param  {[type]}   conditions 条件
  * @param  {Function} cb         回调函数
  */
@@ -37,10 +37,10 @@ module.exports.findOne = function(conditions,cb) {
 
 /**
  * 通过关键词查询用户
- * 
+ *
  * @param  {[type]}   key    关键词
- * @param  {[type]}   offset 
- * @param  {[type]}   limit  
+ * @param  {[type]}   offset
+ * @param  {[type]}   limit
  * @param  {Function} cb     回调函数
  */
 module.exports.findByKey = function(key,offset,limit,cb) {
@@ -66,10 +66,10 @@ module.exports.findByKey = function(key,offset,limit,cb) {
 
 /**
  * 判断是否存在管理员
- * 
+ *
  * @param  {[type]}   username 用户名
  * @param  {Function} cb       回调函数
- * 
+ *
  */
 module.exports.exists = function(username,cb) {
 	var db = databaseModule.getDatabase();
@@ -81,8 +81,8 @@ module.exports.exists = function(username,cb) {
 }
 
 /**
- * 模糊查询用户数量
- * 
+ * 模糊查询管理员数量
+ *
  * @param  {[type]}   key 关键词
  * @param  {Function} cb  回调函数
  */
@@ -103,12 +103,42 @@ module.exports.countByKey = function(key,cb) {
 			cb(null,result[0]["count"]);
 		});
 	}
-	
+
+}
+
+
+
+
+
+/**
+ * 模糊查询被投保人数量
+ *
+ * @param  {[type]}   key 关键词
+ * @param  {Function} cb  回调函数
+ */
+module.exports.countSellerByKey = function(key,cb) {
+	db = databaseModule.getDatabase();
+	sql = "SELECT count(*) as count FROM sp_seller";
+	if(key) {
+		sql += " WHERE seller_name LIKE ?";
+		database.driver.execQuery(
+			sql
+			,["%" + key + "%"],function(err,result){
+				if(err) return cb("查询执行出错");
+				cb(null,result[0]["count"]);
+			});
+	} else {
+		database.driver.execQuery(sql,function(err,result){
+			if(err) return cb("查询执行出错");
+			cb(null,result[0]["count"]);
+		});
+	}
+
 }
 
 /**
  * 通过ID获取管理员对象数据
- * 
+ *
  * @param  {[type]}   id 管理员主键ID
  * @param  {Function} cb 回调函数
  */
@@ -118,7 +148,7 @@ module.exports.show = function(id,cb) {
 
 /**
  * 更新管理员信息
- * 
+ *
  * @param  {[type]}   obj 管理员对象
  * @param  {Function} cb  回调函数
  */
@@ -128,7 +158,7 @@ module.exports.update = function(obj,cb) {
 
 /**
  * 删除管理员对象数据
- * 
+ *
  * @param  {[type]}   id 主键ID
  * @param  {Function} cb 回调函数
  */
@@ -141,7 +171,7 @@ module.exports.destroy = function(id,cb) {
 
 /**
  * 保存管理员信息
- * 
+ *
  * @param  {[type]}   obj 管理员对象
  * @param  {Function} cb  回调函数
  */
@@ -157,7 +187,7 @@ module.exports.save = function(obj,cb) {
 
 /**
  * 获取管理员数量
- * 
+ *
  * @param  {Function} cb 回调函数
  */
 module.exports.count = function(cb) {

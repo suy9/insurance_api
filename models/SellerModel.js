@@ -4,7 +4,7 @@ module.exports = function (db, callback) {
         seller_id: {type: 'serial', key: true},
         seller_num: String,
         seller_name: String,
-        seller_birt: Date,
+        seller_birthday: Date,
         seller_address: String,
         seller_phone: Number,
         username: String,
