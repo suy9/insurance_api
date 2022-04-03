@@ -35,7 +35,7 @@ module.exports.getAllSeller = function (conditions, cb) {
         }
         limit = pagesize;
 
-        sellersDAO.findByKey(key, offset, limit, function (err, sellers) {
+        sellersDAO.findSellerByKey(key, offset, limit, function (err, sellers) {
             var retManagers = [];
             for (idx in sellers) {
                 var seller = sellers[idx];

@@ -23,7 +23,7 @@ module.exports.getAllUser = function (conditions, cb) {
 
 
     // 通过关键词获取用户数量
-    usersDAO.countByKey(conditions["query"], function (err, count) {
+    usersDAO.countUserByKey(conditions["query"], function (err, count) {
         key = conditions["query"];
         pagenum = parseInt(conditions["pagenum"]);
         pagesize = parseInt(conditions["pagesize"]);
@@ -35,7 +35,7 @@ module.exports.getAllUser = function (conditions, cb) {
         }
         limit = pagesize;
 
-        usersDAO.findByKey(key, offset, limit, function (err, users) {
+        usersDAO.findUserByKey(key, offset, limit, function (err, users) {
             var retUsers = [];
             for (idx in users) {
                 var user = users[idx];

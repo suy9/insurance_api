@@ -107,35 +107,6 @@ module.exports.countByKey = function(key,cb) {
 }
 
 
-
-
-
-/**
- * 模糊查询被投保人数量
- *
- * @param  {[type]}   key 关键词
- * @param  {Function} cb  回调函数
- */
-module.exports.countSellerByKey = function(key,cb) {
-	db = databaseModule.getDatabase();
-	sql = "SELECT count(*) as count FROM sp_seller";
-	if(key) {
-		sql += " WHERE seller_name LIKE ?";
-		database.driver.execQuery(
-			sql
-			,["%" + key + "%"],function(err,result){
-				if(err) return cb("查询执行出错");
-				cb(null,result[0]["count"]);
-			});
-	} else {
-		database.driver.execQuery(sql,function(err,result){
-			if(err) return cb("查询执行出错");
-			cb(null,result[0]["count"]);
-		});
-	}
-
-}
-
 /**
  * 通过ID获取管理员对象数据
  *

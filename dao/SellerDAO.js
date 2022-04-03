@@ -43,7 +43,7 @@ module.exports.findOne = function (conditions, cb) {
  * @param  {[type]}   limit
  * @param  {Function} cb     回调函数
  */
-module.exports.findByKey = function (key, offset, limit, cb) {
+module.exports.findSellerByKey = function (key, offset, limit, cb) {
     db = databaseModule.getDatabase();
     sql = "SELECT * FROM sp_seller ";
 
@@ -86,7 +86,7 @@ module.exports.exists = function (username, cb) {
  * @param  {[type]}   key 关键词
  * @param  {Function} cb  回调函数
  */
-module.exports.countByKey = function (key, cb) {
+module.exports.countSellerByKey = function (key, cb) {
     db = databaseModule.getDatabase();
     sql = "SELECT count(*) as count FROM sp_seller";
     if (key) {
