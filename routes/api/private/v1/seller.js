@@ -72,7 +72,7 @@ router.post("/",
             "username":req.body.username,
             "password":req.body.password,
         }
-        sellerServ.createSeller(params,function(err,manager){
+        sellerServ.createSellers(params,function(err,manager){
             if(err) return res.sendResult(null,400,err);
             res.sendResult(manager,201,"创建成功");
         })(req,res,next);

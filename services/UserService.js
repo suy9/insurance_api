@@ -15,7 +15,7 @@ var logger = require('../modules/logger').logger();
 	}
  * @param  {Function} cb         回调函数
  */
-module.exports.getAllUser = function (conditions, cb) {
+module.exports.getAllUsers = function (conditions, cb) {
 
 
     if (!conditions.pagenum) return cb("pagenum 参数不合法");
@@ -55,7 +55,7 @@ module.exports.getAllUser = function (conditions, cb) {
             var resultDta = {};
             resultDta["total"] = count;
             resultDta["pagenum"] = pagenum;
-            resultDta["users"] = retManagers;
+            resultDta["users"] = retUsers;
             cb(err, resultDta);
         });
     });

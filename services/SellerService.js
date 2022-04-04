@@ -67,7 +67,7 @@ module.exports.getAllSeller = function (conditions, cb) {
  * @param  {[type]}   seller 用户数据集
  * @param  {Function} cb   回调函数
  */
-module.exports.createSeller = function (params, cb) {
+module.exports.createSellers = function (params, cb) {
 
     sellersDAO.exists(params.sellername, function (err, isExists) {
         if (err) return cb(err);

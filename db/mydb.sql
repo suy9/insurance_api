@@ -347,7 +347,7 @@ VALUES ('101', '保险管理', '0', '', '', '0');
 INSERT INTO `sp_permission`
 VALUES ('102', '订单管理', '0', '', 'order', '0');
 INSERT INTO `sp_permission`
-VALUES ('104', '商品列表', '101', 'Goods', 'index', '1');
+VALUES ('104', '保险列表', '101', 'Goods', 'index', '1');
 INSERT INTO `sp_permission`
 VALUES ('105', '添加商品', '104', 'Goods', 'tianjia', '2');
 INSERT INTO `sp_permission`
@@ -357,7 +357,9 @@ VALUES ('109', '添加订单', '107', 'Order', 'tianjia', '2');
 INSERT INTO `sp_permission`
 VALUES ('110', '用户列表', '125', 'Manager', 'index', '1');
 INSERT INTO `sp_permission`
-VALUES ('111', '角色列表', '103', 'Role', 'index', '1');
+VALUES ('112', '投保人列表', '125', 'User', 'index', '1');
+INSERT INTO `sp_permission`
+VALUES ('113', '被投保人列表', '125', 'Seller', 'index', '1');
 INSERT INTO `sp_permission`
 VALUES ('116', '商品修改', '104', 'Goods', 'upd', '2');
 INSERT INTO `sp_permission`
@@ -369,31 +371,15 @@ VALUES ('123', '删除分类', '121', '', '', '2');
 INSERT INTO `sp_permission`
 VALUES ('125', '用户管理', '0', '', '', '0');
 INSERT INTO `sp_permission`
-VALUES ('129', '添加角色', '111', '', '', '2');
-INSERT INTO `sp_permission`
-VALUES ('130', '删除角色', '111', '', '', '2');
-INSERT INTO `sp_permission`
 VALUES ('131', '添加用户', '110', '', '', '2');
 INSERT INTO `sp_permission`
 VALUES ('132', '删除用户', '110', '', '', '2');
 INSERT INTO `sp_permission`
 VALUES ('133', '更新用户', '110', '', '', '2');
 INSERT INTO `sp_permission`
-VALUES ('134', '角色授权', '111', '', '', '2');
-INSERT INTO `sp_permission`
-VALUES ('135', '取消角色授权', '111', '', '', '2');
-INSERT INTO `sp_permission`
 VALUES ('136', '获取用户详情', '110', '', '', '2');
 INSERT INTO `sp_permission`
 VALUES ('137', '分配用户角色', '110', '', '', '2');
-INSERT INTO `sp_permission`
-VALUES ('138', '获取角色列表', '111', '', '', '2');
-INSERT INTO `sp_permission`
-VALUES ('139', '获取角色详情', '111', '', '', '2');
-INSERT INTO `sp_permission`
-VALUES ('140', '更新角色信息', '111', '', '', '2');
-INSERT INTO `sp_permission`
-VALUES ('141', '更新角色权限', '111', '', '', '2');
 INSERT INTO `sp_permission`
 VALUES ('142', '获取参数列表', '115', '', '', '2');
 INSERT INTO `sp_permission`
@@ -422,7 +408,28 @@ INSERT INTO `sp_permission`
 VALUES ('155', '获取订单详情', '107', '', '', '2');
 INSERT INTO `sp_permission`
 VALUES ('159', '设置管理状态', '110', '', '', '2');
-
+-- user
+INSERT INTO `sp_permission`
+VALUES ('161', '添加用户', '112', '', '', '2');
+INSERT INTO `sp_permission`
+VALUES ('162', '删除用户', '112', '', '', '2');
+INSERT INTO `sp_permission`
+VALUES ('163', '更新用户', '112', '', '', '2');
+INSERT INTO `sp_permission`
+VALUES ('166', '获取用户详情', '112', '', '', '2');
+INSERT INTO `sp_permission`
+VALUES ('167', '分配用户角色', '112', '', '', '2');
+-- seller
+INSERT INTO `sp_permission`
+VALUES ('171', '添加用户', '113', '', '', '2');
+INSERT INTO `sp_permission`
+VALUES ('172', '删除用户', '113', '', '', '2');
+INSERT INTO `sp_permission`
+VALUES ('173', '更新用户', '113', '', '', '2');
+INSERT INTO `sp_permission`
+VALUES ('176', '获取用户详情', '113', '', '', '2');
+INSERT INTO `sp_permission`
+VALUES ('177', '分配用户角色', '113', '', '', '2');
 -- ----------------------------
 -- Table structure for sp_permission_api
 -- ----------------------------
@@ -438,7 +445,7 @@ CREATE TABLE `sp_permission_api`
     PRIMARY KEY (`id`),
     KEY `ps_id` (`ps_id`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 60
+  AUTO_INCREMENT = 100
   DEFAULT CHARSET = utf8;
 
 -- ----------------------------
@@ -459,11 +466,7 @@ VALUES ('6', '107', 'OrderService', 'getAllOrders', 'orders', null);
 INSERT INTO `sp_permission_api`
 VALUES ('9', '109', 'OrderService', 'createOrder', 'orders', null);
 INSERT INTO `sp_permission_api`
-VALUES ('10', '110', 'ManagerService', 'getAllManagers', 'users', null);
-INSERT INTO `sp_permission_api`
-VALUES ('11', '111', 'RoleService', 'getAllRoles', 'roles', null);
-INSERT INTO `sp_permission_api`
-VALUES ('12', '112', 'RightService', 'getAllRights', 'rights', null);
+VALUES ('10', '110', 'ManagerService', 'getAllManagers', 'managers', null);
 INSERT INTO `sp_permission_api`
 VALUES ('15', '115', 'CategoryService', 'getAttributes', 'params', '2');
 INSERT INTO `sp_permission_api`
@@ -477,25 +480,25 @@ VALUES ('22', '122', 'CategoryService', 'addCategory', 'categories', null);
 INSERT INTO `sp_permission_api`
 VALUES ('23', '123', 'CategoryService', 'deleteCategory', 'categories', null);
 INSERT INTO `sp_permission_api`
-VALUES ('25', '125', null, null, 'users', '1');
+VALUES ('25', '125', null, null, 'managers', '1');
 INSERT INTO `sp_permission_api`
 VALUES ('29', '129', 'RoleService', 'createRole', 'roles', null);
 INSERT INTO `sp_permission_api`
 VALUES ('30', '130', 'RoleService', 'deleteRole', 'roles', null);
 INSERT INTO `sp_permission_api`
-VALUES ('31', '131', 'ManagerService', 'createManager', 'users', null);
+VALUES ('31', '131', 'ManagerService', 'createManager', 'managers', null);
 INSERT INTO `sp_permission_api`
-VALUES ('32', '132', 'ManagerService', 'deleteManager', 'users', null);
+VALUES ('32', '132', 'ManagerService', 'deleteManager', 'managers', null);
 INSERT INTO `sp_permission_api`
-VALUES ('33', '133', 'ManagerService', 'updateManager', 'users', null);
+VALUES ('33', '133', 'ManagerService', 'updateManager', 'managers', null);
 INSERT INTO `sp_permission_api`
 VALUES ('34', '134', 'RoleService', 'updateRoleRight', 'roles', null);
 INSERT INTO `sp_permission_api`
 VALUES ('35', '135', 'RoleService', 'deleteRoleRight', 'roles', null);
 INSERT INTO `sp_permission_api`
-VALUES ('36', '136', 'ManagerService', 'getManager', 'users', null);
+VALUES ('36', '136', 'ManagerService', 'getManager', 'managers', null);
 INSERT INTO `sp_permission_api`
-VALUES ('37', '137', 'ManagerService', 'setRole', 'users', null);
+VALUES ('37', '137', 'ManagerService', 'setRole', 'managers', null);
 INSERT INTO `sp_permission_api`
 VALUES ('38', '138', 'RoleService', 'getAllRoles', 'roles', null);
 INSERT INTO `sp_permission_api`
@@ -539,8 +542,29 @@ VALUES ('57', '157', 'CategoryService', 'deleteAttribute', 'categories', null);
 INSERT INTO `sp_permission_api`
 VALUES ('58', '158', 'CategoryService', 'attributeById', 'categories', null);
 INSERT INTO `sp_permission_api`
-VALUES ('59', '159', 'ManagerService', 'updateMgrState', 'users', null);
-
+VALUES ('59', '159', 'ManagerService', 'updateMgrState', 'managers', null);
+-- user_permission
+INSERT INTO `sp_permission_api`
+VALUES ('60', '112', 'UserService', 'getAllUsers', 'users', null);
+INSERT INTO `sp_permission_api`
+VALUES ('61', '161', 'UserService', 'createUser', 'users', null);
+INSERT INTO `sp_permission_api`
+VALUES ('62', '162', 'UserService', 'deleteUser', 'users', null);
+INSERT INTO `sp_permission_api`
+VALUES ('63', '163', 'UserService', 'updateUser', 'users', null);
+INSERT INTO `sp_permission_api`
+VALUES ('66', '166', 'UserService', 'getUser', 'users', null);
+-- seller_permission
+INSERT INTO `sp_permission_api`
+VALUES ('70', '113', 'SellerService', 'getAllSellers', 'sellers', null);
+INSERT INTO `sp_permission_api`
+VALUES ('71', '171', 'SellerService', 'createSeller', 'sellers', null);
+INSERT INTO `sp_permission_api`
+VALUES ('72', '172', 'SellerService', 'deleteSeller', 'sellers', null);
+INSERT INTO `sp_permission_api`
+VALUES ('73', '173', 'SellerService', 'updateSeller', 'sellers', null);
+INSERT INTO `sp_permission_api`
+VALUES ('76', '176', 'SellerService', 'getSeller', 'sellers', null);
 -- ----------------------------
 -- Table structure for sp_report_1
 -- ----------------------------
@@ -620,256 +644,6 @@ VALUES ('30', '14028', '西部', '2018-01-01');
 INSERT INTO `sp_report_1`
 VALUES ('31', '14091', '其他', '2018-01-01');
 
--- ----------------------------
--- Table structure for sp_report_2
--- ----------------------------
-DROP TABLE IF EXISTS `sp_report_2`;
-CREATE TABLE `sp_report_2`
-(
-    `id`        int(8) NOT NULL AUTO_INCREMENT,
-    `rp2_page`  varchar(128) DEFAULT NULL,
-    `rp2_count` int(8)       DEFAULT NULL,
-    `rp2_date`  date         DEFAULT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 117
-  DEFAULT CHARSET = utf8;
-
--- ----------------------------
--- Records of sp_report_2
--- ----------------------------
-INSERT INTO `sp_report_2`
-VALUES ('1', '首页', '2001', '2017-12-28');
-INSERT INTO `sp_report_2`
-VALUES ('2', '分类', '2401', '2017-12-28');
-INSERT INTO `sp_report_2`
-VALUES ('3', '商品列表', '2410', '2017-12-28');
-INSERT INTO `sp_report_2`
-VALUES ('4', '商品详情', '4512', '2017-12-28');
-INSERT INTO `sp_report_2`
-VALUES ('5', '首页', '2311', '2017-12-29');
-INSERT INTO `sp_report_2`
-VALUES ('6', '分类', '3941', '2017-12-29');
-INSERT INTO `sp_report_2`
-VALUES ('7', '商品列表', '4312', '2017-12-29');
-INSERT INTO `sp_report_2`
-VALUES ('8', '商品详情', '1231', '2017-12-29');
-INSERT INTO `sp_report_2`
-VALUES ('9', '首页', '2391', '2017-12-27');
-INSERT INTO `sp_report_2`
-VALUES ('10', '分类', '1232', '2017-12-27');
-INSERT INTO `sp_report_2`
-VALUES ('11', '商品列表', '1232', '2017-12-27');
-INSERT INTO `sp_report_2`
-VALUES ('12', '商品详情', '1231', '2017-12-27');
-INSERT INTO `sp_report_2`
-VALUES ('13', '首页', '2440', '2017-12-26');
-INSERT INTO `sp_report_2`
-VALUES ('14', '分类', '3468', '2017-12-26');
-INSERT INTO `sp_report_2`
-VALUES ('15', '商品列表', '3022', '2017-12-26');
-INSERT INTO `sp_report_2`
-VALUES ('16', '商品详情', '3704', '2017-12-26');
-INSERT INTO `sp_report_2`
-VALUES ('17', '首页', '2455', '2017-12-25');
-INSERT INTO `sp_report_2`
-VALUES ('18', '分类', '3165', '2017-12-25');
-INSERT INTO `sp_report_2`
-VALUES ('19', '商品列表', '1458', '2017-12-25');
-INSERT INTO `sp_report_2`
-VALUES ('20', '商品详情', '2799', '2017-12-25');
-INSERT INTO `sp_report_2`
-VALUES ('21', '首页', '2619', '2017-12-24');
-INSERT INTO `sp_report_2`
-VALUES ('22', '分类', '3697', '2017-12-24');
-INSERT INTO `sp_report_2`
-VALUES ('23', '商品列表', '3630', '2017-12-24');
-INSERT INTO `sp_report_2`
-VALUES ('24', '商品详情', '3060', '2017-12-24');
-INSERT INTO `sp_report_2`
-VALUES ('25', '首页', '3412', '2017-12-23');
-INSERT INTO `sp_report_2`
-VALUES ('26', '分类', '3880', '2017-12-23');
-INSERT INTO `sp_report_2`
-VALUES ('27', '商品列表', '2166', '2017-12-23');
-INSERT INTO `sp_report_2`
-VALUES ('28', '商品详情', '1187', '2017-12-23');
-INSERT INTO `sp_report_2`
-VALUES ('29', '首页', '1439', '2017-12-22');
-INSERT INTO `sp_report_2`
-VALUES ('30', '分类', '2636', '2017-12-22');
-INSERT INTO `sp_report_2`
-VALUES ('31', '商品列表', '1862', '2017-12-22');
-INSERT INTO `sp_report_2`
-VALUES ('32', '商品详情', '3401', '2017-12-22');
-INSERT INTO `sp_report_2`
-VALUES ('33', '首页', '1421', '2017-12-21');
-INSERT INTO `sp_report_2`
-VALUES ('34', '分类', '1904', '2017-12-21');
-INSERT INTO `sp_report_2`
-VALUES ('35', '商品列表', '1258', '2017-12-21');
-INSERT INTO `sp_report_2`
-VALUES ('36', '商品详情', '2576', '2017-12-21');
-INSERT INTO `sp_report_2`
-VALUES ('37', '首页', '2108', '2017-12-20');
-INSERT INTO `sp_report_2`
-VALUES ('38', '分类', '1811', '2017-12-20');
-INSERT INTO `sp_report_2`
-VALUES ('39', '商品列表', '1730', '2017-12-20');
-INSERT INTO `sp_report_2`
-VALUES ('40', '商品详情', '2220', '2017-12-20');
-INSERT INTO `sp_report_2`
-VALUES ('41', '首页', '1910', '2017-12-19');
-INSERT INTO `sp_report_2`
-VALUES ('42', '分类', '1891', '2017-12-19');
-INSERT INTO `sp_report_2`
-VALUES ('43', '商品列表', '2724', '2017-12-19');
-INSERT INTO `sp_report_2`
-VALUES ('44', '商品详情', '3949', '2017-12-19');
-INSERT INTO `sp_report_2`
-VALUES ('45', '首页', '1571', '2017-12-18');
-INSERT INTO `sp_report_2`
-VALUES ('46', '分类', '1011', '2017-12-18');
-INSERT INTO `sp_report_2`
-VALUES ('47', '商品列表', '2342', '2017-12-18');
-INSERT INTO `sp_report_2`
-VALUES ('48', '商品详情', '1679', '2017-12-18');
-INSERT INTO `sp_report_2`
-VALUES ('49', '首页', '3370', '2017-12-17');
-INSERT INTO `sp_report_2`
-VALUES ('50', '分类', '1813', '2017-12-17');
-INSERT INTO `sp_report_2`
-VALUES ('51', '商品列表', '3953', '2017-12-17');
-INSERT INTO `sp_report_2`
-VALUES ('52', '商品详情', '1328', '2017-12-17');
-INSERT INTO `sp_report_2`
-VALUES ('53', '首页', '2780', '2017-12-16');
-INSERT INTO `sp_report_2`
-VALUES ('54', '分类', '2917', '2017-12-16');
-INSERT INTO `sp_report_2`
-VALUES ('55', '商品列表', '2244', '2017-12-16');
-INSERT INTO `sp_report_2`
-VALUES ('56', '商品详情', '1472', '2017-12-16');
-INSERT INTO `sp_report_2`
-VALUES ('57', '首页', '2627', '2017-12-15');
-INSERT INTO `sp_report_2`
-VALUES ('58', '分类', '1719', '2017-12-15');
-INSERT INTO `sp_report_2`
-VALUES ('59', '商品列表', '2713', '2017-12-15');
-INSERT INTO `sp_report_2`
-VALUES ('60', '商品详情', '1412', '2017-12-15');
-INSERT INTO `sp_report_2`
-VALUES ('61', '首页', '3919', '2017-12-14');
-INSERT INTO `sp_report_2`
-VALUES ('62', '分类', '2360', '2017-12-14');
-INSERT INTO `sp_report_2`
-VALUES ('63', '商品列表', '2045', '2017-12-14');
-INSERT INTO `sp_report_2`
-VALUES ('64', '商品详情', '2144', '2017-12-14');
-INSERT INTO `sp_report_2`
-VALUES ('65', '首页', '3586', '2017-12-13');
-INSERT INTO `sp_report_2`
-VALUES ('66', '分类', '1498', '2017-12-13');
-INSERT INTO `sp_report_2`
-VALUES ('67', '商品列表', '1733', '2017-12-13');
-INSERT INTO `sp_report_2`
-VALUES ('68', '商品详情', '3174', '2017-12-13');
-INSERT INTO `sp_report_2`
-VALUES ('69', '首页', '3668', '2017-12-12');
-INSERT INTO `sp_report_2`
-VALUES ('70', '分类', '1818', '2017-12-12');
-INSERT INTO `sp_report_2`
-VALUES ('71', '商品列表', '3087', '2017-12-12');
-INSERT INTO `sp_report_2`
-VALUES ('72', '商品详情', '2980', '2017-12-12');
-INSERT INTO `sp_report_2`
-VALUES ('73', '首页', '1641', '2017-12-11');
-INSERT INTO `sp_report_2`
-VALUES ('74', '分类', '1263', '2017-12-11');
-INSERT INTO `sp_report_2`
-VALUES ('75', '商品列表', '3396', '2017-12-11');
-INSERT INTO `sp_report_2`
-VALUES ('76', '商品详情', '3191', '2017-12-11');
-INSERT INTO `sp_report_2`
-VALUES ('77', '首页', '1769', '2017-12-10');
-INSERT INTO `sp_report_2`
-VALUES ('78', '分类', '1269', '2017-12-10');
-INSERT INTO `sp_report_2`
-VALUES ('79', '商品列表', '3041', '2017-12-10');
-INSERT INTO `sp_report_2`
-VALUES ('80', '商品详情', '1396', '2017-12-10');
-INSERT INTO `sp_report_2`
-VALUES ('81', '首页', '2860', '2017-12-01');
-INSERT INTO `sp_report_2`
-VALUES ('82', '分类', '3111', '2017-12-01');
-INSERT INTO `sp_report_2`
-VALUES ('83', '商品列表', '2975', '2017-12-01');
-INSERT INTO `sp_report_2`
-VALUES ('84', '商品详情', '1542', '2017-12-01');
-INSERT INTO `sp_report_2`
-VALUES ('85', '首页', '3786', '2017-12-02');
-INSERT INTO `sp_report_2`
-VALUES ('86', '分类', '1304', '2017-12-02');
-INSERT INTO `sp_report_2`
-VALUES ('87', '商品列表', '3163', '2017-12-02');
-INSERT INTO `sp_report_2`
-VALUES ('88', '商品详情', '1903', '2017-12-02');
-INSERT INTO `sp_report_2`
-VALUES ('89', '首页', '2028', '2017-12-03');
-INSERT INTO `sp_report_2`
-VALUES ('90', '分类', '3429', '2017-12-03');
-INSERT INTO `sp_report_2`
-VALUES ('91', '商品列表', '1061', '2017-12-03');
-INSERT INTO `sp_report_2`
-VALUES ('92', '商品详情', '3019', '2017-12-03');
-INSERT INTO `sp_report_2`
-VALUES ('93', '首页', '1913', '2017-12-04');
-INSERT INTO `sp_report_2`
-VALUES ('94', '分类', '2510', '2017-12-04');
-INSERT INTO `sp_report_2`
-VALUES ('95', '商品列表', '2812', '2017-12-04');
-INSERT INTO `sp_report_2`
-VALUES ('96', '商品详情', '2528', '2017-12-04');
-INSERT INTO `sp_report_2`
-VALUES ('97', '首页', '3206', '2017-12-05');
-INSERT INTO `sp_report_2`
-VALUES ('98', '分类', '1445', '2017-12-05');
-INSERT INTO `sp_report_2`
-VALUES ('99', '商品列表', '2610', '2017-12-05');
-INSERT INTO `sp_report_2`
-VALUES ('100', '商品详情', '1716', '2017-12-05');
-INSERT INTO `sp_report_2`
-VALUES ('101', '首页', '2750', '2017-12-06');
-INSERT INTO `sp_report_2`
-VALUES ('102', '分类', '1601', '2017-12-06');
-INSERT INTO `sp_report_2`
-VALUES ('103', '商品列表', '1755', '2017-12-06');
-INSERT INTO `sp_report_2`
-VALUES ('104', '商品详情', '2974', '2017-12-06');
-INSERT INTO `sp_report_2`
-VALUES ('105', '首页', '2606', '2017-12-07');
-INSERT INTO `sp_report_2`
-VALUES ('106', '分类', '3110', '2017-12-07');
-INSERT INTO `sp_report_2`
-VALUES ('107', '商品列表', '3731', '2017-12-07');
-INSERT INTO `sp_report_2`
-VALUES ('108', '商品详情', '2324', '2017-12-07');
-INSERT INTO `sp_report_2`
-VALUES ('109', '首页', '2429', '2017-12-08');
-INSERT INTO `sp_report_2`
-VALUES ('110', '分类', '1172', '2017-12-08');
-INSERT INTO `sp_report_2`
-VALUES ('111', '商品列表', '3574', '2017-12-08');
-INSERT INTO `sp_report_2`
-VALUES ('112', '商品详情', '1354', '2017-12-08');
-INSERT INTO `sp_report_2`
-VALUES ('113', '首页', '1051', '2017-12-09');
-INSERT INTO `sp_report_2`
-VALUES ('114', '分类', '3190', '2017-12-09');
-INSERT INTO `sp_report_2`
-VALUES ('115', '商品列表', '2800', '2017-12-09');
-INSERT INTO `sp_report_2`
-VALUES ('116', '商品详情', '3431', '2017-12-09');
 
 -- ----------------------------
 -- Table structure for sp_report_3

@@ -20,7 +20,7 @@ router.get("/",
     },
     // 处理业务逻辑
     function(req,res,next) {
-        userServ.getAllUser(
+        userServ.getAllUsers(
             {
                 "query":req.query.query,
                 "pagenum":req.query.pagenum,
@@ -72,7 +72,7 @@ router.post("/",
             "username":req.body.username,
             "password":req.body.password,
         }
-        userServ.createManager(params,function(err,manager){
+        userServ.createUser(params,function(err,manager){
             if(err) return res.sendResult(null,400,err);
             res.sendResult(manager,201,"创建成功");
         })(req,res,next);
