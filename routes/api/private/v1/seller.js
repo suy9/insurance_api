@@ -57,11 +57,14 @@ router.get("/:id",
 router.post("/",
     // 验证参数
     function(req,res,next) {
-        if(!req.body.username){
-            return res.sendResult(null,400,"用户名不能为空");
+        if(!req.body.user_name){
+            return res.sendResult(null,400,"被投保人名不能为空");
         }
-        if(!req.body.password) {
-            return res.sendResult(null,400,"密码不能为空");
+        if(!req.body.user_sex) {
+            return res.sendResult(null,400,"性别不能为空");
+        }
+        if(!req.body.user_num) {
+            return res.sendResult(null,400,"身份证号不能为空");
         }
 
         next();
@@ -69,12 +72,13 @@ router.post("/",
     // 处理业务逻辑
     function(req,res,next) {
         params = {
-            "username":req.body.username,
-            "password":req.body.password,
+            "seller_name":req.body.seller_name,
+            "seller_sex":req.body.seller_sex,
+            "seller_num":req.body.seller_num
         }
-        sellerServ.createSellers(params,function(err,manager){
+        sellerServ.createSellers(params,function(err,seller){
             if(err) return res.sendResult(null,400,err);
-            res.sendResult(manager,201,"创建成功");
+            res.sendResult(seller,201,"创建成功");
         })(req,res,next);
     }
 );
