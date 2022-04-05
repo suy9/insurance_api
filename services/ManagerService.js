@@ -210,6 +210,7 @@ module.exports.updateMgrState = function (id, state, cb) {
  * 管理员登录
  * @param  {[type]}   username 用户名
  * @param  {[type]}   password 密码
+ * @param  {[type]}   password 密码
  * @param  {Function} cb       回调
  */
 module.exports.login = function (username, password, cb) {
