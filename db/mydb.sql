@@ -729,21 +729,21 @@ CREATE TABLE `sp_user`
     `user_id`       int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
     `user_num`      varchar(255)     NOT NULL COMMENT '投保人身份证号',
     `user_name`     varchar(255)     NOT NULL COMMENT '投保人姓名',
-    `user_birthday` date             NOT NULL COMMENT '投保人生日',
-    `user_address`  varchar(255)     NOT NULL COMMENT '投保人地址',
+    `user_birthday` varchar(30)      NOT NULL COMMENT '投保人生日',
+    `user_address`  varchar(255) COMMENT '投保人地址',
     `user_phone`    varchar(12)      NOT NULL COMMENT '投保人电话',
-    `username`      varchar(128)     NOT NULL                 DEFAULT '' COMMENT '登录名',
-    `password`      char(64)         NOT NULL                 DEFAULT '' COMMENT '登录密码',
-    `user_email`    varchar(64)      NOT NULL                 DEFAULT '' COMMENT '邮箱',
+    `username`      varchar(128) COMMENT '登录名',
+    `password`      char(64) COMMENT '登录密码',
+    `user_email`    varchar(64) COMMENT '邮箱',
     `user_sex`      enum ('女','男')   NOT NULL COMMENT '性别',
-    `user_qq`       varchar(32)                               DEFAULT '' COMMENT 'qq',
-    `user_edu`      enum ('博士','硕士','本科','专科','高中','初中','小学') DEFAULT NULL COMMENT '学历',
+    `user_qq`       varchar(32)                                   DEFAULT '' COMMENT 'qq',
+    `user_edu`      enum ('博士','硕士','本科','专科','高中','初中','小学','无') DEFAULT '无' COMMENT '学历',
     `create_time`   int(11)          NOT NULL COMMENT '创建时间',
     `update_time`   int(11)          NOT NULL COMMENT '修改时间',
     PRIMARY KEY (`user_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 12
-  DEFAULT CHARSET = utf8 COMMENT ='会员表';
+  DEFAULT CHARSET = utf8 COMMENT ='投保人表';
 
 -- ----------------------------
 -- Records of sp_user
@@ -778,7 +778,7 @@ CREATE TABLE `sp_seller`
     PRIMARY KEY (`seller_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 12
-  DEFAULT CHARSET = utf8 COMMENT ='会员表';
+  DEFAULT CHARSET = utf8 COMMENT ='被投保人表';
 
 -- ----------------------------
 -- Records of sp_user

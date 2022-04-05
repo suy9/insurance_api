@@ -4,7 +4,7 @@ module.exports = function (db, callback) {
         user_id: {type: 'serial', key: true},
         user_num: String,
         user_name: String,
-        user_birthday: Date,
+        user_birthday: String,
         user_address: String,
         user_phone: Number,
         username: String,
@@ -12,7 +12,7 @@ module.exports = function (db, callback) {
         user_email: String,
         user_sex: ['男', '女'],
         user_qq: String,
-        user_edu: ['博士', '硕士', '本科', '专科', '高中', '初中', '小学'],
+        user_edu: ['博士', '硕士', '本科', '专科', '高中', '初中', '小学','无'],
         create_time: Number,
         update_time: Number
     }, {

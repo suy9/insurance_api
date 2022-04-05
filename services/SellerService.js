@@ -46,6 +46,8 @@ module.exports.getAllSeller = function (conditions, cb) {
                     "seller_name": seller.seller_name,
                     "seller_birthday": seller.seller_birthday,
                     "seller_phone": seller.seller_phone,
+                    "seller_email": seller.seller_email,
+                    "seller_address": seller.seller_address,
                     "username": seller.username,
                     "seller_sex": seller.seller_sex,
                     "create_time": seller.create_time,
@@ -77,33 +79,24 @@ module.exports.createSellers = function (params, cb) {
         }
 
         sellersDAO.create({
-            "seller_num": params.seller_num,
             "seller_name": params.seller_name,
-            "seller_birthday": params.seller_birthday,
-            "seller_phone": params.seller_phone,
-            "username": params.username,
-            "password": params.password,
-            "seller_email": params.seller_email,
             "seller_sex": params.seller_sex,
-            "seller_qq": params.seller_qq,
-            "seller_edu": params.seller_edu,
+            "seller_num": params.seller_num,
+            "seller_email": params.seller_email,
+            "seller_phone": params.seller_phone,
+            "seller_address": params.seller_address,
             "create_time": (Date.parse(new Date()) / 1000),
             "update_time": (Date.parse(new Date()) / 1000),
         }, function (err, seller) {
             if (err) return cb("创建失败");
             result = {
-                "id": seller.seller_id,
-                "seller_num": seller.seller_num,
+                "seller_id": seller.seller_id,
                 "seller_name": seller.seller_name,
-                "seller_birthday": seller.seller_birthday,
-                "seller_address": seller.seller_address,
-                "seller_phone": seller.seller_phone,
-                "username": seller.username,
-                "password": seller.password,
-                "seller_email": seller.seller_email,
                 "seller_sex": seller.seller_sex,
-                "seller_qq": seller.seller_qq,
-                "seller_edu": seller.seller_edu,
+                "seller_num": seller.seller_num,
+                "seller_email": seller.seller_email,
+                "seller_phone": seller.seller_phone,
+                "seller_address": seller.seller_address,
                 "create_time": seller.create_time,
                 "update_time": seller.update_time,
             };
@@ -121,29 +114,18 @@ module.exports.createSellers = function (params, cb) {
 module.exports.updateSeller = function (params, cb) {
     sellersDAO.update(
         {
-            "seller_name": params.seller_name,
-            "seller_birthday": params.seller_birthday,
-            "seller_address": params.seller_address,
+            "seller_id": params.id,
             "seller_phone": params.seller_phone,
-            "seller_email": params.seller_email,
-            "seller_qq": params.seller_qq,
-            "seller_edu": params.seller_edu,
-            "update_time": (Date.parse(new Date()) / 1000),
+            "seller_email": params.seller_email
         },
         function (err, seller) {
             if (err) return cb(err);
             cb(
                 null,
                 {
-                    "id": seller.seller_id,
-                    "seller_num": seller.seller_num,
-                    "seller_name": seller.seller_name,
-                    "seller_birthday": seller.seller_birthday,
+                    "seller_id": seller.seller_id,
                     "seller_phone": seller.seller_phone,
-                    "username": seller.username,
-                    "seller_sex": seller.seller_sex,
-                    "create_time": seller.create_time,
-                    "update_time": seller.update_time,
+                    "seller_email": seller.seller_email
                 });
         }
     )
@@ -162,15 +144,17 @@ module.exports.getSeller = function (id, cb) {
         cb(
             null,
             {
-                "id": seller.seller_id,
-                "seller_num": seller.seller_num,
+                "seller_id": seller.seller_id,
                 "seller_name": seller.seller_name,
-                "seller_birthday": seller.seller_birthday,
-                "seller_phone": seller.seller_phone,
-                "username": seller.username,
                 "seller_sex": seller.seller_sex,
-                "create_time": seller.create_time,
-                "update_time": seller.update_time,
+                "seller_num": seller.seller_num,
+                "seller_email": seller.seller_email,
+                "seller_phone": seller.seller_phone,
+                "seller_address": seller.seller_address,
+                // "seller_birthday": seller.seller_birthday,
+                // "username": seller.username,
+                // "create_time": seller.create_time,
+                // "update_time": seller.update_time,
             }
         );
     });
