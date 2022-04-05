@@ -76,7 +76,9 @@ router.post("/",
             "user_sex":req.body.user_sex,
             "user_num":req.body.user_num,
             "user_email":req.body.user_email,
-            "user_phone":req.body.user_phone
+            "user_phone":req.body.user_phone,
+            "user_birthday":req.body.user_birthday,
+            "user_address":req.body.user_address
         }
         userServ.createUser(params,function(err,user){
             if(err) return res.sendResult(null,400,err);
@@ -100,7 +102,7 @@ router.put("/:id",
     function(req,res,next) {
         userServ.updateUser(
             {
-                "user_name":req.params.user_name,
+                "id":req.params.id,
                 "user_email":req.body.user_email,
                 "user_phone":req.body.user_phone
             },

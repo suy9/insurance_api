@@ -20,7 +20,7 @@ router.get("/",
     },
     // 处理业务逻辑
     function(req,res,next) {
-        sellerServ.getAllSeller(
+        sellerServ.getAllSellers(
             {
                 "query":req.query.query,
                 "pagenum":req.query.pagenum,
@@ -57,13 +57,13 @@ router.get("/:id",
 router.post("/",
     // 验证参数
     function(req,res,next) {
-        if(!req.body.user_name){
+        if(!req.body.seller_name){
             return res.sendResult(null,400,"被投保人名不能为空");
         }
-        if(!req.body.user_sex) {
+        if(!req.body.seller_sex) {
             return res.sendResult(null,400,"性别不能为空");
         }
-        if(!req.body.user_num) {
+        if(!req.body.seller_num) {
             return res.sendResult(null,400,"身份证号不能为空");
         }
 
@@ -76,9 +76,11 @@ router.post("/",
             "seller_sex":req.body.seller_sex,
             "seller_num":req.body.seller_num,
             "seller_email":req.body.seller_email,
-            "seller_phone":req.body.seller_phone
+            "seller_phone":req.body.seller_phone,
+            "seller_birthday":req.body.seller_birthday,
+            "seller_address":req.body.seller_address
         }
-        sellerServ.createSellers(params,function(err,seller){
+        sellerServ.createSeller(params,function(err,seller){
             if(err) return res.sendResult(null,400,err);
             res.sendResult(seller,201,"创建成功");
         })(req,res,next);
@@ -100,7 +102,7 @@ router.put("/:id",
     function(req,res,next) {
         sellerServ.updateSeller(
             {
-                "seller_name":req.params.seller_name,
+                "id":req.params.id,
                 "seller_email":req.body.seller_email,
                 "seller_phone":req.body.seller_phone
             },

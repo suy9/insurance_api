@@ -15,7 +15,7 @@ var logger = require('../modules/logger').logger();
 	}
  * @param  {Function} cb         回调函数
  */
-module.exports.getAllSeller = function (conditions, cb) {
+module.exports.getAllSellers = function (conditions, cb) {
 
 
     if (!conditions.pagenum) return cb("pagenum 参数不合法");
@@ -45,10 +45,13 @@ module.exports.getAllSeller = function (conditions, cb) {
                     "seller_num": seller.seller_num,
                     "seller_name": seller.seller_name,
                     "seller_birthday": seller.seller_birthday,
-                    "seller_phone": seller.seller_phone,
-                    "seller_email": seller.seller_email,
                     "seller_address": seller.seller_address,
+                    "seller_phone": seller.seller_phone,
                     "username": seller.username,
+                    "password": seller.password,
+                    "seller_email": seller.seller_email,
+                    "seller_qq": seller.seller_qq,
+                    "seller_edu": seller.seller_edu,
                     "seller_sex": seller.seller_sex,
                     "create_time": seller.create_time,
                     "update_time": seller.update_time,
@@ -69,7 +72,7 @@ module.exports.getAllSeller = function (conditions, cb) {
  * @param  {[type]}   seller 用户数据集
  * @param  {Function} cb   回调函数
  */
-module.exports.createSellers = function (params, cb) {
+module.exports.createSeller = function (params, cb) {
 
     sellersDAO.exists(params.username, function (err, isExists) {
         if (err) return cb(err);
@@ -79,24 +82,34 @@ module.exports.createSellers = function (params, cb) {
         }
 
         sellersDAO.create({
-            "seller_name": params.seller_name,
-            "seller_sex": params.seller_sex,
             "seller_num": params.seller_num,
-            "seller_email": params.seller_email,
-            "seller_phone": params.seller_phone,
+            "seller_name": params.seller_name,
+            "seller_birthday": params.seller_birthday,
             "seller_address": params.seller_address,
+            "seller_phone": params.seller_phone,
+            "username": params.username,
+            "password": params.password,
+            "seller_email": params.seller_email,
+            "seller_sex": params.seller_sex,
+            "seller_qq": params.seller_qq,
+            "seller_edu": params.seller_edu,
             "create_time": (Date.parse(new Date()) / 1000),
             "update_time": (Date.parse(new Date()) / 1000),
         }, function (err, seller) {
             if (err) return cb("创建失败");
             result = {
-                "seller_id": seller.seller_id,
-                "seller_name": seller.seller_name,
-                "seller_sex": seller.seller_sex,
-                "seller_num": seller.seller_num,
-                "seller_email": seller.seller_email,
-                "seller_phone": seller.seller_phone,
-                "seller_address": seller.seller_address,
+                "seller_id": params.seller_id,
+                "seller_num": params.seller_num,
+                "seller_name": params.seller_name,
+                "seller_birthday": params.seller_birthday,
+                "seller_address": params.seller_address,
+                "seller_phone": params.seller_phone,
+                "username": params.username,
+                "password": params.password,
+                "seller_email": params.seller_email,
+                "seller_sex": params.seller_sex,
+                "seller_qq": params.seller_qq,
+                "seller_edu": params.seller_edu,
                 "create_time": seller.create_time,
                 "update_time": seller.update_time,
             };
@@ -114,9 +127,14 @@ module.exports.createSellers = function (params, cb) {
 module.exports.updateSeller = function (params, cb) {
     sellersDAO.update(
         {
-            "seller_id": params.id,
+            "seller_name": params.seller_name,
+            "seller_birthday": params.seller_birthday,
+            "seller_address": params.seller_address,
             "seller_phone": params.seller_phone,
-            "seller_email": params.seller_email
+            "seller_email": params.seller_email,
+            "seller_qq": params.seller_qq,
+            "seller_edu": params.seller_edu,
+            "update_time": (Date.parse(new Date()) / 1000),
         },
         function (err, seller) {
             if (err) return cb(err);
@@ -124,8 +142,14 @@ module.exports.updateSeller = function (params, cb) {
                 null,
                 {
                     "seller_id": seller.seller_id,
+                    "seller_num": seller.seller_num,
+                    "seller_name": seller.seller_name,
+                    "seller_birthday": seller.seller_birthday,
                     "seller_phone": seller.seller_phone,
-                    "seller_email": seller.seller_email
+                    "username": seller.username,
+                    "seller_sex": seller.seller_sex,
+                    "create_time": seller.create_time,
+                    "update_time": seller.update_time,
                 });
         }
     )
@@ -145,8 +169,6 @@ module.exports.getSeller = function (id, cb) {
             null,
             {
                 "seller_id": seller.seller_id,
-                "seller_name": seller.seller_name,
-                "seller_sex": seller.seller_sex,
                 "seller_num": seller.seller_num,
                 "seller_name": seller.seller_name,
                 "seller_birthday": seller.seller_birthday,
