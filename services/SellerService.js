@@ -36,11 +36,11 @@ module.exports.getAllSeller = function (conditions, cb) {
         limit = pagesize;
 
         sellersDAO.findSellerByKey(key, offset, limit, function (err, sellers) {
-            var retManagers = [];
+            var retSellers = [];
             for (idx in sellers) {
                 var seller = sellers[idx];
 
-                retManagers.push({
+                retSellers.push({
                     "id": seller.seller_id,
                     "seller_num": seller.seller_num,
                     "seller_name": seller.seller_name,
@@ -55,7 +55,7 @@ module.exports.getAllSeller = function (conditions, cb) {
             var resultDta = {};
             resultDta["total"] = count;
             resultDta["pagenum"] = pagenum;
-            resultDta["sellers"] = retManagers;
+            resultDta["sellers"] = retSellers;
             cb(err, resultDta);
         });
     });

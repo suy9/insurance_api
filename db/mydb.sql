@@ -336,7 +336,7 @@ CREATE TABLE `sp_permission`
     `ps_level` enum ('0','2','1')   NOT NULL DEFAULT '0' COMMENT '权限等级',
     PRIMARY KEY (`ps_id`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 160
+  AUTO_INCREMENT = 200
   DEFAULT CHARSET = utf8 COMMENT ='权限表';
 
 -- ----------------------------
@@ -417,8 +417,6 @@ INSERT INTO `sp_permission`
 VALUES ('163', '更新用户', '112', '', '', '2');
 INSERT INTO `sp_permission`
 VALUES ('166', '获取用户详情', '112', '', '', '2');
-INSERT INTO `sp_permission`
-VALUES ('167', '分配用户角色', '112', '', '', '2');
 -- seller
 INSERT INTO `sp_permission`
 VALUES ('171', '添加用户', '113', '', '', '2');
@@ -428,8 +426,6 @@ INSERT INTO `sp_permission`
 VALUES ('173', '更新用户', '113', '', '', '2');
 INSERT INTO `sp_permission`
 VALUES ('176', '获取用户详情', '113', '', '', '2');
-INSERT INTO `sp_permission`
-VALUES ('177', '分配用户角色', '113', '', '', '2');
 -- ----------------------------
 -- Table structure for sp_permission_api
 -- ----------------------------

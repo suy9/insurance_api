@@ -56,7 +56,7 @@ module.exports.getAllManagers = function (conditions, cb) {
             var resultDta = {};
             resultDta["total"] = count;
             resultDta["pagenum"] = pagenum;
-            resultDta["users"] = retManagers;
+            resultDta["managers"] = retManagers;
             cb(err, resultDta);
         });
     });

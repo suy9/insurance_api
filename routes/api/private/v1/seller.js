@@ -74,7 +74,9 @@ router.post("/",
         params = {
             "seller_name":req.body.seller_name,
             "seller_sex":req.body.seller_sex,
-            "seller_num":req.body.seller_num
+            "seller_num":req.body.seller_num,
+            "seller_email":req.body.seller_email,
+            "seller_phone":req.body.seller_phone
         }
         sellerServ.createSellers(params,function(err,seller){
             if(err) return res.sendResult(null,400,err);
@@ -98,13 +100,13 @@ router.put("/:id",
     function(req,res,next) {
         sellerServ.updateSeller(
             {
-                "id":req.params.id,
-                "mobile":req.body.mobile,
-                "email":req.body.email
+                "seller_name":req.params.seller_name,
+                "seller_email":req.body.seller_email,
+                "seller_phone":req.body.seller_phone
             },
-            function(err,manager) {
+            function(err,seller) {
                 if(err) return res.sendResult(null,400,err);
-                res.sendResult(manager,200,"更新成功");
+                res.sendResult(seller,200,"更新成功");
             }
         )(req,res,next);
     }
