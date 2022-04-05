@@ -69,7 +69,7 @@ module.exports.getAllSeller = function (conditions, cb) {
  */
 module.exports.createSellers = function (params, cb) {
 
-    sellersDAO.exists(params.sellername, function (err, isExists) {
+    sellersDAO.exists(params.username, function (err, isExists) {
         if (err) return cb(err);
 
         if (isExists) {
@@ -121,7 +121,7 @@ module.exports.createSellers = function (params, cb) {
 module.exports.updateSeller = function (params, cb) {
     sellersDAO.update(
         {
-            "seller_name": params.name,
+            "seller_name": params.seller_name,
             "seller_birthday": params.seller_birthday,
             "seller_address": params.seller_address,
             "seller_phone": params.seller_phone,

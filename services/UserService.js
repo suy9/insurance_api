@@ -41,7 +41,7 @@ module.exports.getAllUsers = function (conditions, cb) {
                 var user = users[idx];
 
                 retUsers.push({
-                    "id": user.user_id,
+                    "user_id": user.user_id,
                     "user_num": user.user_num,
                     "user_name": user.user_name,
                     "user_birthday": user.user_birthday,
@@ -92,7 +92,7 @@ module.exports.createUser = function (params, cb) {
         }, function (err, user) {
             if (err) return cb("创建失败");
             result = {
-                "id": user.user_id,
+                "user_id": user.user_id,
                 "user_num": user.user_num,
                 "user_name": user.user_name,
                 "user_birthday": user.user_birthday,
@@ -121,7 +121,7 @@ module.exports.createUser = function (params, cb) {
 module.exports.updateUser = function (params, cb) {
     usersDAO.update(
         {
-            "user_name": params.name,
+            "user_name": params.user_name,
             "user_birthday": params.user_birthday,
             "user_address": params.user_address,
             "user_phone": params.user_phone,
@@ -135,7 +135,7 @@ module.exports.updateUser = function (params, cb) {
             cb(
                 null,
                 {
-                    "id": user.user_id,
+                    "user_id": user.user_id,
                     "user_num": user.user_num,
                     "user_name": user.user_name,
                     "user_birthday": user.user_birthday,
@@ -162,7 +162,7 @@ module.exports.getUser = function (id, cb) {
         cb(
             null,
             {
-                "id": user.user_id,
+                "user_id": user.user_id,
                 "user_num": user.user_num,
                 "user_name": user.user_name,
                 "user_birthday": user.user_birthday,
