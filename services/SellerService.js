@@ -148,13 +148,13 @@ module.exports.getSeller = function (id, cb) {
                 "seller_name": seller.seller_name,
                 "seller_sex": seller.seller_sex,
                 "seller_num": seller.seller_num,
-                "seller_email": seller.seller_email,
+                "seller_name": seller.seller_name,
+                "seller_birthday": seller.seller_birthday,
                 "seller_phone": seller.seller_phone,
-                "seller_address": seller.seller_address,
-                // "seller_birthday": seller.seller_birthday,
-                // "username": seller.username,
-                // "create_time": seller.create_time,
-                // "update_time": seller.update_time,
+                "username": seller.username,
+                "seller_sex": seller.seller_sex,
+                "create_time": seller.create_time,
+                "update_time": seller.update_time,
             }
         );
     });

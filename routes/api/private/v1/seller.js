@@ -28,7 +28,7 @@ router.get("/",
             },
             function(err,result){
                 if(err) return res.sendResult(null,400,err);
-                res.sendResult(result,200,"获取管理员列表成功");
+                res.sendResult(result,200,"获取被投保人列表成功");
             }
         )(req,res,next);
 
