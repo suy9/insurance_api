@@ -102,9 +102,10 @@ router.put("/:id",
     function(req,res,next) {
         sellerServ.updateSeller(
             {
-                "id":req.params.id,
+                "seller_id":req.body.seller_id,
                 "seller_email":req.body.seller_email,
-                "seller_phone":req.body.seller_phone
+                "seller_phone":req.body.seller_phone,
+                "seller_address":req.body.seller_address
             },
             function(err,seller) {
                 if(err) return res.sendResult(null,400,err);

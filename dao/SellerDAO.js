@@ -120,10 +120,11 @@ module.exports.show = function (id, cb) {
 /**
  * 更新被投保人信息
  *
- * @param  {[type]}   obj 被投保人对象
+ * @param  {seller_id}   obj 被投保人对象
  * @param  {Function} cb  回调函数
  */
 module.exports.update = function (obj, cb) {
+    console.log(obj)
     daoModule.update("SellerModel", obj.seller_id, obj, cb);
 }
 

@@ -121,14 +121,13 @@ module.exports.createUser = function (params, cb) {
 /**
  * 更新投保人信息
  *
- * @param  {[type]}   params 投保人信息
+ * @param  {*}   params 投保人信息
  * @param  {Function} cb     回调函数
  */
 module.exports.updateUser = function (params, cb) {
     usersDAO.update(
         {
-            "user_name": params.user_name,
-            "user_birthday": params.user_birthday,
+            "user_id": params.user_id,
             "user_address": params.user_address,
             "user_phone": params.user_phone,
             "user_email": params.user_email,

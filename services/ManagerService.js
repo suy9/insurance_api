@@ -103,7 +103,7 @@ module.exports.createManager = function (params, cb) {
 /**
  * 更新管理员信息
  *
- * @param  {[type]}   params 管理员信息
+ * @param  {*}   params 管理员信息
  * @param  {Function} cb     回调函数
  */
 module.exports.updateManager = function (params, cb) {

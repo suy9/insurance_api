@@ -124,6 +124,7 @@ module.exports.show = function(id,cb) {
  * @param  {Function} cb  回调函数
  */
 module.exports.update = function(obj,cb) {
+	console.log(obj)
 	daoModule.update("ManagerModel",obj.mg_id,obj,cb);
 }
 

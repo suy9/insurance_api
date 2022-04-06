@@ -39,6 +39,7 @@ router.get("/",
 router.get("/:id",
     // 参数验证
     function(req,res,next) {
+    console.log(res)
         if(!req.params.id) {
             return res.sendResult(null,400,"投保人ID不能为空");
         }
@@ -102,9 +103,10 @@ router.put("/:id",
     function(req,res,next) {
         userServ.updateUser(
             {
-                "id":req.params.id,
+                "user_id":req.body.user_id,
                 "user_email":req.body.user_email,
-                "user_phone":req.body.user_phone
+                "user_phone":req.body.user_phone,
+                "user_address":req.body.user_address
             },
             function(err,user) {
                 if(err) return res.sendResult(null,400,err);
@@ -120,7 +122,7 @@ router.delete("/:id",
     function(req,res,next){
         if(!req.params.id) return res.sendResult(null,400,"用户ID不能为空");
         if(isNaN(parseInt(req.params.id))) return res.sendResult(null,400,"ID必须是数字");
-        if(req.params.id == 500) return res.sendResult(null,400,"不允许删除admin账户");
+        //if(req.params.user_id === 500) return res.sendResult(null,400,"不允许删除admin账户");
         next();
     },
     // 处理业务逻辑

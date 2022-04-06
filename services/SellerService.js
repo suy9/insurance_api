@@ -121,14 +121,13 @@ module.exports.createSeller = function (params, cb) {
 /**
  * 更新被投保人信息
  *
- * @param  {[type]}   params 被投保人信息
+ * @param  {*}   params 被投保人信息
  * @param  {Function} cb     回调函数
  */
 module.exports.updateSeller = function (params, cb) {
     sellersDAO.update(
         {
-            "seller_name": params.seller_name,
-            "seller_birthday": params.seller_birthday,
+            "seller_id":params.seller_id,
             "seller_address": params.seller_address,
             "seller_phone": params.seller_phone,
             "seller_email": params.seller_email,
