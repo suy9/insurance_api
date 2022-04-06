@@ -39,7 +39,6 @@ router.get("/",
 router.get("/:id",
     // 参数验证
     function(req,res,next) {
-    console.log(res)
         if(!req.params.id) {
             return res.sendResult(null,400,"投保人ID不能为空");
         }

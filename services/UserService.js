@@ -41,7 +41,7 @@ module.exports.getAllUsers = function (conditions, cb) {
                 var user = users[idx];
 
                 retUsers.push({
-                    "user_id": user.user_id,
+                    "id": user.user_id,
                     "user_num": user.user_num,
                     "user_name": user.user_name,
                     "user_birthday": user.user_birthday,
