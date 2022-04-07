@@ -27,7 +27,6 @@ module.exports.getAllUsers = function (conditions, cb) {
         key = conditions["query"];
         pagenum = parseInt(conditions["pagenum"]);
         pagesize = parseInt(conditions["pagesize"]);
-
         pageCount = Math.ceil(count / pagesize);
         offset = (pagenum - 1) * pagesize;
         if (offset >= count) {
@@ -93,8 +92,8 @@ module.exports.createUser = function (params, cb) {
             "user_sex": params.user_sex,
             "user_qq": params.user_qq,
             "user_edu": params.user_edu,
-            "create_time": (Date.parse(new Date()) / 1000),
-            "update_time": (Date.parse(new Date()) / 1000),
+            "create_time": (Date.parse(new Date()) / 1000).toString(),
+            "update_time": (Date.parse(new Date()) / 1000).toString(),
         }, function (err, user) {
             if (err) return cb("创建失败");
             result = {

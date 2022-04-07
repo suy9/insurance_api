@@ -266,7 +266,7 @@ CREATE TABLE `sp_order`
     `order_kind`   varchar(32)            NOT NULL COMMENT '保险种类',
     `order_number` varchar(32)            NOT NULL COMMENT '订单编号',
     `order_price`  decimal(10, 2)         NOT NULL DEFAULT '0.00' COMMENT '订单总金额',
-    `order_pay`    enum ('0','1','2','3') NOT NULL DEFAULT '1' COMMENT '支付方式  0未支付 1支付宝  2微信  3银行卡',
+    `order_pay`    enum ('1','2','3') NOT NULL DEFAULT '1' COMMENT '支付方式  1支付宝  2微信  3银行卡',
     `pay_status`   enum ('0','1')         NOT NULL DEFAULT '0' COMMENT '订单状态： 0未付款、1已付款',
     `create_time`  int(10) unsigned       NOT NULL COMMENT '记录生成时间',
     `update_time`  int(10) unsigned       NOT NULL COMMENT '记录修改时间',
@@ -281,9 +281,9 @@ CREATE TABLE `sp_order`
 -- Records of sp_order
 -- ----------------------------
 INSERT INTO `sp_order`
-VALUES ('22', '1', '1', 'itcast-59e411eaaccc9', '222.00', '2', '1', '1508119018', '1508119018');
+VALUES ('22', '1', '1','人寿' ,'itcast-59e411eaaccc9', '222.00', '2', '1', '1508119018', '1508119018');
 INSERT INTO `sp_order`
-VALUES ('23', '2', '2', 'itcast-59e71b546d30a', '805.00', '0', '0', '1508318036', '1508318036');
+VALUES ('23', '2', '2', '车险','itcast-59e71b546d30a', '805.00', '1', '0', '1508318036', '1508318036');
 
 -- ----------------------------
 -- Table structure for sp_order_goods

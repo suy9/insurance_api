@@ -1,227 +1,185 @@
 var _ = require('lodash');
 var path = require("path");
 var orm = require("orm");
-var dao = require(path.join(process.cwd(), "dao/DAO"));
+var orderDAO = require(path.join(process.cwd(), "dao/OrderDAO"));
 
 var Promise = require("bluebird");
 var uniqid = require('uniqid');
 
-function doCheckOrderParams(params) {
-    return new Promise(function (resolve, reject) {
-        var info = {};
-        if (params.order_id) info.order_id = params.order_id;
+/**
+ * 获取所有保单
+ * @param  {[type]}   conditions 查询条件
+ * 查询条件统一规范
+ * conditions
+ {
+		"query" : 关键词查询,
+		"pagenum" : 页数,
+		"pagesize" : 每页长度
+	}
+ * @param  {Function} cb         回调函数
+ */
+module.exports.getAllOrders = function (conditions, cb) {
 
-        if (!params.order_id) info.order_number = "itcast-" + uniqid();
+    if (!conditions.pagenum) return cb("pagenum 参数不合法");
+    if (!conditions.pagesize) return cb("pagesize 参数不合法");
 
-        if (!params.order_id) {
-            if (!params.user_id) return reject("投保人ID不能为空");
-            if (isNaN(parseInt(params.user_id))) return reject("投保人ID必须是数字");
-            info.user_id = params.user_id;
-        }
+    orderDAO.countOrderByKey(conditions["query"], function (err, count) {
+        key = conditions["query"];
+        pagenum = parseInt(conditions["pagenum"]);
+        pagesize = parseInt(conditions["pagesize"]);
 
-        if (!params.order_id) {
-            if (!params.seller_id) return reject("被投保人ID不能为空");
-            if (isNaN(parseInt(params.seller_id))) return reject("被投保人ID必须是数字");
-            info.seller_id = params.seller_id;
-        }
-
-
-        if (!params.order_price) return reject("订单价格不能为空");
-        if (isNaN(parseFloat(params.order_price))) return reject("订单价格必须为数字");
-        info.order_price = params.order_price;
-
-        if (params.order_pay) {
-            info.order_pay = params.order_pay;
-        } else {
-            info.order_pay = '0';
-        }
-
-        if (params.goods) {
-            info.goods = params.goods;
-        }
-
-        info.pay_status = '0';
-        if (params.order_id) info.create_time = (Date.parse(new Date()) / 1000);
-        info.update_time = (Date.parse(new Date()) / 1000);
-
-        resolve(info);
-    });
-}
-
-function doCreateOrder(info) {
-    return new Promise(function (resolve, reject) {
-        dao.create("OrderModel", _.clone(info), function (err, newOrder) {
-            if (err) return reject("创建订单失败");
-            info.order = newOrder;
-            resolve(info);
-        });
-    });
-}
-
-function doCreateOrderGood(orderGood) {
-    return new Promise(function (resolve, reject) {
-        dao.create("OrderGoodModel", orderGood, function (err, newOrderGood) {
-            if (err) return reject("创建订单商品失败");
-            resolve(newOrderGood);
-        });
-    });
-}
-
-function doAddOrderGoods(info) {
-
-    return new Promise(function (resolve, reject) {
-
-        if (!info.order) return reject("订单对象未创建");
-
-        var orderGoods = info.goods;
-
-        if (orderGoods && orderGoods.length > 0) {
-            var fns = [];
-            var goods_total_price = _.sum(_.map(orderGoods, "goods_price"));
-
-            _(orderGoods).forEach(function (orderGood) {
-                orderGood.order_id = info.order.order_id;
-                orderGood.goods_total_price = goods_total_price;
-                fns.push(doCreateOrderGood(orderGood));
-            });
-            Promise.all(fns)
-                .then(function (results) {
-                    info.order.goods = results;
-                    resolve(info);
-                })
-                .catch(function (error) {
-                    if (error) return reject(error);
-                });
-
-        } else {
-            resolve(info);
-        }
-    });
-}
-
-function doGetAllOrderGoods(info) {
-    return new Promise(function (resolve, reject) {
-        if (!info.order) return reject("订单对象未创建");
-
-        dao.list("OrderGoodModel", {"columns": {"order_id": info.order.order_id}}, function (err, orderGoods) {
-
-
-            if (err) return reject("获取订单商品列表失败");
-
-            info.order.goods = orderGoods;
-            resolve(info);
-        })
-    });
-}
-
-function doGetOrder(info) {
-    return new Promise(function (resolve, reject) {
-        dao.show("OrderModel", info.order_id, function (err, newOrder) {
-
-            if (err) return reject("获取订单详情失败");
-            if (!newOrder) return reject("订单ID不能存在");
-            info.order = newOrder;
-            resolve(info);
-        })
-    });
-}
-
-function doUpdateOrder(info) {
-    return new Promise(function (resolve, reject) {
-        dao.update("OrderModel", info.order_id, _.clone(info), function (err, newOrder) {
-            if (err) return reject("更新失败");
-            info.order = newOrder;
-            resolve(info);
-        });
-
-    });
-}
-
-
-module.exports.createOrder = function (params, cb) {
-    doCheckOrderParams(params)
-        .then(doCreateOrder)
-        .then(doAddOrderGoods)
-        .then(function (info) {
-            cb(null, info.order);
-        })
-        .catch(function (err) {
-            cb(err);
-        });
-}
-
-
-module.exports.getAllOrders = function (params, cb) {
-    var conditions = {};
-    if (!params.pagenum || params.pagenum <= 0) return cb("pagenum 参数错误");
-    if (!params.pagesize || params.pagesize <= 0) return cb("pagesize 参数错误");
-    conditions["columns"] = {};
-    if (params.user_id) {
-        conditions["columns"]["user_id"] = params.user_id;
-    }
-
-    if (params.pay_status) {
-        conditions["columns"]["pay_status"] = params.pay_status;
-    }
-
-    dao.countByConditions("OrderModel", conditions, function (err, count) {
-        if (err) return cb(err);
-        pagesize = params.pagesize;
-        pagenum = params.pagenum;
         pageCount = Math.ceil(count / pagesize);
+        if (pagenum > pageCount) return cb("页数超出范围");
         offset = (pagenum - 1) * pagesize;
         if (offset >= count) {
             offset = count;
         }
         limit = pagesize;
+        orderDAO.findOrderByKey(key, offset, limit, function (err, orders) {
+            var retOrders = [];
+            for (idx in orders) {
+                var order = orders[idx];
 
-        // 构建条件
-        conditions["offset"] = offset;
-        conditions["limit"] = limit;
-        // conditions["only"] =
-        conditions["order"] = "-create_time";
-
-
-        dao.list("OrderModel", conditions, function (err, orders) {
-            if (err) return cb(err);
+                retOrders.push({
+                    "id": order.order_id,
+                    "user_id": order.user_id,
+                    "seller_id": order.seller_id,
+                    "order_kind": order.order_kind,
+                    "order_number": order.order_number,
+                    "order_price": order.order_price,
+                    "order_pay": order.order_pay,
+                    "pay_status": order.pay_status,
+                    "create_time": order.create_time,
+                    "update_time": order.update_time,
+                })
+            }
             var resultDta = {};
             resultDta["total"] = count;
             resultDta["pagenum"] = pagenum;
-            resultDta["goods"] = _.map(orders, function (order) {
-                return order;//_.omit(order,);
-            });
+            resultDta["orders"] = retOrders;
             cb(err, resultDta);
-        })
+        });
     });
 }
 
-module.exports.getOrder = function (orderId, cb) {
-    if (!orderId) return cb("用户ID不能为空");
-    if (isNaN(parseInt(orderId))) return cb("用户ID必须是数字");
+/**
+ * 创建保单
+ *
+ * @param  {[type]}   user 保单数据集
+ * @param  {Function} cb   回调函数
+ */
+module.exports.createOrder = function (params, cb) {
 
-    doGetOrder({"order_id": orderId})
-        .then(doGetAllOrderGoods)
-        .then(function (info) {
-            cb(null, info.order);
-        })
-        .catch(function (err) {
-            cb(err);
+    orderDAO.exists(params.order_number, function (err, exists) {
+        if (err) return cb(err);
+
+        if (isExists) {
+            return cb("保单号已存在");
+        }
+
+        orderDAO.create({
+            "user_id": params.user_id,
+            "seller_id": params.seller_id,
+            "order_kind": params.order_kind,
+            "order_number": params.order_number,
+            "order_price": params.order_price,
+            "order_pay": params.order_pay,
+            "pay_status": params.pay_status,
+            "create_time": (Date.parse(new Date()) / 1000).toString(),
+            "update_time": (Date.parse(new Date()) / 1000).toString(),
+        }, function (err, order) {
+            if (err) return cb(err);
+            result = {
+                "id": order.id,
+                "user_id": order.user_id,
+                "seller_id": order.seller_id,
+                "order_kind": order.order_kind,
+                "order_number": order.order_number,
+                "order_price": order.order_price,
+                "order_pay": order.order_pay,
+                "pay_status": order.pay_status,
+                "create_time": order.create_time,
+                "update_time": order.update_time,
+            };
+            cb(null, result);
         });
-
+    })
 }
 
-module.exports.updateOrder = function (orderId, params, cb) {
-    if (!orderId) return cb("用户ID不能为空");
-    if (isNaN(parseInt(orderId))) return cb("用户ID必须是数字");
-    params["order_id"] = orderId;
-    doCheckOrderParams(params)
-        .then(doUpdateOrder)
-        .then(doGetAllOrderGoods)
-        .then(function (info) {
-            cb(null, info.order);
-        })
-        .catch(function (err) {
-            cb(err);
-        });
+/**
+ * 更新保单信息
+ *
+ * @param  {*}   params 保单信息
+ * @param  {Function} cb     回调函数
+ */
+module.exports.updateOrder = function (params, cb) {
+    orderDAO.update(
+        {
+            "order_id": params.order_id,
+            "user_id": params.user_id,
+            "seller_id": params.seller_id,
+            "order_kind": params.order_kind,
+            "order_number": params.order_number,
+            "order_price": params.order_price,
+            "order_pay": params.order_pay,
+            "pay_status": params.pay_status,
+            "update_time": (Date.parse(new Date()) / 1000).toString(),
+        },
+        function (err, order) {
+            if (err) return cb(err);
+            cb(
+                null,
+                {
+                    "id": order.id,
+                    "user_id": order.user_id,
+                    "seller_id": order.seller_id,
+                    "order_kind": order.order_kind,
+                    "order_number": order.order_number,
+                    "order_price": order.order_price,
+                    "order_pay": order.order_pay,
+                    "pay_status": order.pay_status,
+                    "create_time": order.create_time,
+                    "update_time": order.update_time,
+                });
+        }
+    )
+}
 
+/**
+ * 通过保单 ID 获取投保人信息
+ *
+ * @param  {[type]}   id 保单 ID
+ * @param  {Function} cb 回调函数
+ */
+module.exports.getOrder = function (id, cb) {
+    orderDAO.show(id,function (err, order) {
+        if (err) return cb(err);
+        if(!order) return cb("保单不存在");
+        cb(null, {
+            "id": order.order_id,
+            "user_id": order.user_id,
+            "seller_id": order.seller_id,
+            "order_kind": order.order_kind,
+            "order_number": order.order_number,
+            "order_price": order.order_price,
+            "order_pay": order.order_pay,
+            "pay_status": order.pay_status,
+            "create_time": order.create_time,
+            "update_time": order.update_time,
+        });
+    });
+}
+
+/**
+ * 通过保单 ID 进行删除操作
+ *
+ * @param  {[type]}   id 保单ID
+ * @param  {Function} cb 回调函数
+ */
+
+module.exports.deleteOrder = function (id, cb) {
+    orderDAO.destroy(id, function (err) {
+        if (err) return cb("删除失败");
+        cb(null);
+    });
 }

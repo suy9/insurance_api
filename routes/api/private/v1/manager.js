@@ -74,11 +74,11 @@ router.post("/",
 	// 处理业务逻辑
 	function(req,res,next) {
 		params = {
-			"username":req.body.username,
-			"password":req.body.password,
-			"mobile":req.body.mobile,
-			"email":req.body.email,
-			"rid":req.body.rid
+			username:req.body.username,
+			password:req.body.password,
+			mobile:req.body.mobile,
+			email:req.body.email,
+			rid:req.body.rid
 		}
 		mgrServ.createManager(params,function(err,manager){
 			if(err) return res.sendResult(null,400,err);

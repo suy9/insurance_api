@@ -29,6 +29,7 @@ router.get("/",
             function(err,result){
                 if(err) return res.sendResult(null,400,err);
                 res.sendResult(result,200,"获取投保人列表成功");
+                console.log(result);
             }
         )(req,res,next);
 
