@@ -40,7 +40,16 @@ module.exports.getAllOrders = function (conditions, cb) {
                 retOrders.push({
                     "id": order.order_id,
                     "user_id": order.user_id,
-
+                    "user_name": order.user_name,
+                    "user_num": order.user_num,
+                    "user_birthday": order.user_birthday,
+                    "user_phone": order.user_phone,
+                    "user_address": order.user_address,
+                    "seller_name": order.seller_name,
+                    "seller_num": order.seller_num,
+                    "seller_birthday": order.seller_birthday,
+                    "seller_phone": order.seller_phone,
+                    "seller_address": order.seller_address,
                     "seller_id": order.seller_id,
                     "order_kind": order.order_kind,
                     "order_number": order.order_number,
