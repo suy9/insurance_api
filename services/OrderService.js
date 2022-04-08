@@ -56,6 +56,7 @@ module.exports.getAllOrders = function (conditions, cb) {
                     "pay_status": order.pay_status,
                     "create_time": order.create_time,
                     "update_time": order.update_time,
+                    "next_pay_time": order.next_pay_time,
                 })
             }
             var resultDta = {};
@@ -74,8 +75,14 @@ module.exports.getAllOrders = function (conditions, cb) {
  * @param  {Function} cb   回调函数
  */
 module.exports.createOrder = function (params, cb) {
+    var nowDate = new Date();//当前时间
+    var year = nowDate.getFullYear();//获取年
+    var month = nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1) : nowDate.getMonth() + 1;//获取月份，两位不够补0
+    var day = nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();//获取日期，两位不够补0
 
-    orderDAO.exists(params.order_number, function (err,isExists) {
+    var dateStr = year + "-" + month + "-" + day;
+    var datenextStr = (year + 1) + "-" + month + "-" + day;
+    orderDAO.exists(params.order_number, function (err, isExists) {
         if (err) return cb(err);
 
         if (isExists) {
@@ -90,8 +97,9 @@ module.exports.createOrder = function (params, cb) {
             "order_price": params.order_price,
             "order_pay": params.order_pay,
             "pay_status": params.pay_status,
-            "create_time": (Date.parse(new Date()) / 1000),
-            "update_time": (Date.parse(new Date()) / 1000),
+            "create_time": dateStr,
+            "update_time": dateStr,
+            "next_pay_time": datenextStr,
         }, function (err, order) {
             if (err) return cb(err);
             result = {
@@ -105,6 +113,7 @@ module.exports.createOrder = function (params, cb) {
                 "pay_status": order.pay_status,
                 "create_time": order.create_time,
                 "update_time": order.update_time,
+                "next_pay_time": order.next_pay_time,
             };
             cb(null, result);
         });
@@ -128,7 +137,8 @@ module.exports.updateOrder = function (params, cb) {
             "order_price": params.order_price,
             "order_pay": params.order_pay,
             "pay_status": params.pay_status,
-            "update_time": (Date.parse(new Date()) / 1000),
+            "update_time": Date.now(),
+            "next_pay_time": Date.now(),
         },
         function (err, order) {
             if (err) return cb(err);
@@ -145,6 +155,7 @@ module.exports.updateOrder = function (params, cb) {
                     "pay_status": order.pay_status,
                     "create_time": order.create_time,
                     "update_time": order.update_time,
+                    "next_pay_time": order.next_pay_time,
                 });
         }
     )
@@ -157,9 +168,9 @@ module.exports.updateOrder = function (params, cb) {
  * @param  {Function} cb 回调函数
  */
 module.exports.getOrder = function (id, cb) {
-    orderDAO.show(id,function (err, order) {
+    orderDAO.show(id, function (err, order) {
         if (err) return cb(err);
-        if(!order) return cb("保单不存在");
+        if (!order) return cb("保单不存在");
         cb(null, {
             "id": order.order_id,
             "user_id": order.user_id,
@@ -171,6 +182,7 @@ module.exports.getOrder = function (id, cb) {
             "pay_status": order.pay_status,
             "create_time": order.create_time,
             "update_time": order.update_time,
+            "next_pay_time": order.next_pay_time,
         });
     });
 }

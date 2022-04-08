@@ -46,13 +46,22 @@ module.exports.findOne = function (conditions, cb) {
 
 module.exports.findOrderByKey = function (key, offset, limit, cb) {
     db = databaseModule.getDatabase();
-    sql = "SELECT sp_order.*,sp_user.user_name,sp_user.user_num,sp_user.user_birthday,sp_user.user_address,sp_user.user_phone,sp_seller.seller_name,sp_seller.seller_num,sp_seller.seller_birthday,sp_seller.seller_address,sp_seller.seller_phone  FROM sp_order,sp_user,sp_seller WHERE sp_order.user_id=sp_user.user_id AND  sp_order.seller_id=sp_seller.seller_id";
+    sql = "SELECT sp_order.*,sp_user.user_name,sp_user.user_num,sp_user.user_birthday,sp_user.user_address,sp_user.user_phone,sp_seller.seller_name,sp_seller.seller_num,sp_seller.seller_birthday,sp_seller.seller_address,sp_seller.seller_phone  " +
+        "FROM sp_order,sp_user,sp_seller " +
+        "WHERE sp_order.user_num=sp_user.user_num " +
+        "AND sp_order.seller_num=sp_seller.seller_num ";
     if (key) {
-        sql += " WHERE user_id LIKE ? LIMIT ?,?";
+        // sql += " WHERE user_id LIKE ? LIMIT ?,?";
+        sql += "AND (sp_user.user_name LIKE ? " +
+            "OR sp_seller.seller_name LIKE ? " +
+            "OR sp_user.user_phone LIKE ? " +
+            "OR sp_seller.seller_phone LIKE ? " +
+            "OR sp_order.order_number LIKE ?) " +
+            "LIMIT ?,?";
         database.driver.execQuery(
             sql
-            , ["%" + key + "%", offset, limit], function (err, orders) {
-                if (err) return cb("查询执行出错");
+            , ["%" + key + "%", "%" + key + "%", "%" + key + "%", "%" + key + "%", "%" + key + "%", offset, limit], function (err, orders) {
+                if (err) return cb("1");
                 cb(null, orders);
             });
     } else {
@@ -74,7 +83,7 @@ module.exports.findOrderByKey = function (key, offset, limit, cb) {
 module.exports.exists = function (username, cb) {
     var db = databaseModule.getDatabase();
     var Model = db.models.OrderModel;
-    Model.exists({"user_id": username}, function (err, isExists) {
+    Model.exists({"user_num": username}, function (err, isExists) {
         if (err) return cb("查询失败");
         cb(null, isExists);
     });
@@ -87,13 +96,24 @@ module.exports.exists = function (username, cb) {
  * @param  {Function} cb  回调函数
  */
 module.exports.countOrderByKey = function (key, cb) {
+    console.log(key);
     db = databaseModule.getDatabase();
     sql = "SELECT count(*) as count FROM sp_order";
     if (key) {
-        sql += " WHERE user_id LIKE ?";
+        // sql += " WHERE user_id LIKE ?";
+        sql = "SELECT count(*) as count " +
+            "FROM sp_order,sp_user,sp_seller " +
+            "WHERE sp_order.user_num=sp_user.user_num " +
+            "AND sp_order.seller_num=sp_seller.seller_num " +
+            "AND (sp_user.user_name LIKE ? " +
+            "OR sp_seller.seller_name LIKE ? " +
+            "OR sp_user.user_phone LIKE ? " +
+            "OR sp_seller.seller_phone LIKE ? " +
+            "OR sp_order.order_number LIKE ?) " +
+            "LIMIT ?,?";
         database.driver.execQuery(
             sql
-            , ["%" + key + "%"], function (err, result) {
+            , ["%" + key + "%", "%" + key + "%", "%" + key + "%", "%" + key + "%", "%" + key + "%", offset, limit], function (err, result) {
                 if (err) return cb("查询执行出错");
                 cb(null, result[0]["count"]);
             });

@@ -37,6 +37,7 @@ router.get("/",
 router.post("/",
     // 参数验证
     function (req, res, next) {
+    console.log(req.body);
         if (!req.body.user_id) return res.sendResult(null, 400, "user_id 参数错误");
         if (!req.body.seller_id) return res.sendResult(null, 400, "seller_id 参数错误");
         if (!req.body.order_kind) return res.sendResult(null, 400, "order_kind 参数错误");
@@ -55,7 +56,8 @@ router.post("/",
             "order_number": req.body.order_number,
             "order_price": req.body.order_price,
             "order_pay": req.body.order_pay,
-            "pay_status": req.body.pay_status
+            "pay_status": req.body.pay_status,
+            "next_pay_time": req.body.next_pay_time
         }
         orderServ.createOrder(params, function (err, result) {
                 if (err) return res.sendResult(null, 400, err);
@@ -76,11 +78,12 @@ router.put("/:id",
     // 业务逻辑
     function (req, res, next) {
         params = {
-            id: req.params.id,
-            order_kind: req.body.order_kind,
-            order_price: req.body.order_price,
-            order_pay: req.body.order_pay,
-            pay_status: req.body.pay_status
+            "id": req.params.id,
+            "order_kind": req.body.order_kind,
+            "order_price": req.body.order_price,
+            "order_pay": req.body.order_pay,
+            "pay_status": req.body.pay_status,
+            "next_pay_time": req.body.next_pay_time
         }
         orderServ.updateOrder(params, function (err, result) {
                 if (err) return res.sendResult(null, 400, err);

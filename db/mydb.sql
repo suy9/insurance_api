@@ -140,19 +140,19 @@ VALUES ('40', '空调回收', '4', '2', '0', 'full/da07de0ac2f01b18a9ec206fd44a5
 DROP TABLE IF EXISTS `sp_goods`;
 CREATE TABLE `sp_goods`
 (
-    `goods_id`         mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
-    `goods_name`       varchar(255)          NOT NULL COMMENT '保险名称',
-    `goods_price`      decimal(10, 2)        NOT NULL DEFAULT '0.00' COMMENT '保险价格',
-    `cat_id`           smallint(5) unsigned  NOT NULL DEFAULT '0' COMMENT '类型id',
-    `goods_introduce`  text COMMENT '商品详情介绍',
-    `is_del`           enum ('0','1')        NOT NULL DEFAULT '0' COMMENT '0:正常  1:删除',
-    `add_time`         date               NOT NULL COMMENT '添加商品时间',
-    `upd_time`         date               NOT NULL COMMENT '修改商品时间',
-    `delete_time`      int(11)                        DEFAULT NULL COMMENT '软删除标志字段',
-    `cat_one_id`       smallint(5)                    DEFAULT '0' COMMENT '一级分类id',
-    `cat_two_id`       smallint(5)                    DEFAULT '0' COMMENT '二级分类id',
-    `cat_three_id`     smallint(5)                    DEFAULT '0' COMMENT '三级分类id',
-    `goods_state`      int(11)                        DEFAULT '0' COMMENT '商品状态 0: 未通过 1: 审核中 2: 已审核',
+    `goods_id`        mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
+    `goods_name`      varchar(255)          NOT NULL COMMENT '保险名称',
+    `goods_price`     decimal(10, 2)        NOT NULL DEFAULT '0.00' COMMENT '保险价格',
+    `cat_id`          smallint(5) unsigned  NOT NULL DEFAULT '0' COMMENT '类型id',
+    `goods_introduce` text COMMENT '商品详情介绍',
+    `is_del`          enum ('0','1')        NOT NULL DEFAULT '0' COMMENT '0:正常  1:删除',
+    `add_time`        int(10)               NOT NULL COMMENT '添加商品时间',
+    `upd_time`        int(10)               NOT NULL COMMENT '修改商品时间',
+    `delete_time`     int(11)                        DEFAULT NULL COMMENT '软删除标志字段',
+    `cat_one_id`      smallint(5)                    DEFAULT '0' COMMENT '一级分类id',
+    `cat_two_id`      smallint(5)                    DEFAULT '0' COMMENT '二级分类id',
+    `cat_three_id`    smallint(5)                    DEFAULT '0' COMMENT '三级分类id',
+    `goods_state`     int(11)                        DEFAULT '0' COMMENT '商品状态 0: 未通过 1: 审核中 2: 已审核',
     PRIMARY KEY (`goods_id`),
     UNIQUE KEY `goods_name` (`goods_name`),
     KEY `goods_price` (`goods_price`),
@@ -168,7 +168,7 @@ CREATE TABLE `sp_goods`
 INSERT INTO `sp_goods`
 VALUES ('1', '险种1', '49.00', '1191',
         '<div class="lazyimg"><div moduleid="R9000475_3" modulename="商品详情"><p><img data-src="//image.suning.cn/uimg/sop/commodity/138920341921275653753268_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/138920341921275653753268_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/320294018209000122936780_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/320294018209000122936780_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/704928021836697029300000_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/704928021836697029300000_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/674563845781283224909500_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/674563845781283224909500_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/151134588018743970526002_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/151134588018743970526002_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/831318046793946113206000_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/831318046793946113206000_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/916281915185884963655750_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/916281915185884963655750_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/472343017167947876723490_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/472343017167947876723490_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/942767809372154340834000_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/942767809372154340834000_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/163812559664514099011170_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/163812559664514099011170_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/697203950107440612220250_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/697203950107440612220250_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/697247714477543390785500_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/697247714477543390785500_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/161411030914914658667827_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/161411030914914658667827_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/669094843119273038295020_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/669094843119273038295020_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/362990339109906307146490_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/362990339109906307146490_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/200766730097564804937320_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/200766730097564804937320_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/357686216186091569615500_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/357686216186091569615500_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/206539641915557176577986_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/206539641915557176577986_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/106568805613403252031066_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/106568805613403252031066_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/562575204157804367889930_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/562575204157804367889930_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/201136725963941859463860_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/201136725963941859463860_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/174343734111585091167516_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/174343734111585091167516_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/174437664961525990196410_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/174437664961525990196410_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/852602712102381755560600_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/852602712102381755560600_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"></p></div><div moduleid="R9000475_4" modulename="商品尺码表"><p><img data-src="//image.suning.cn/uimg/sop/commodity/191351338116998619431514_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/191351338116998619431514_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"></p></div><div moduleid="R9000475_5" modulename="模特效果"><p><img data-src="//image.suning.cn/uimg/sop/commodity/378452992490143925172200_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/378452992490143925172200_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"></p></div></div>',
-        '0','1514255862','1514255862',null,'1157','1174','1191','0');
+        '0', '1514255862', '1514255862', null, '1157', '1174', '1191', '0');
 INSERT INTO `sp_goods`
 VALUES ('2', '险种2', '11.00', '1193',
         '<div class=\"lazyimg\"><p><img data-src=\"//image.suning.cn/uimg/sop/commodity/689982530173400477121750_x.jpg?from=mobile&amp;format=80q.webp\" alt=\"\" src=\"//image.suning.cn/uimg/sop/commodity/689982530173400477121750_x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p>邦诺姿 情趣内衣无痕蕾丝提臀诱惑丁字裤中腰档纯棉内裤女低腰三角裤</p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/549576726132196462330130_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"25kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/549576726132196462330130_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/104343487925972960976710_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"15kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/104343487925972960976710_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/677188189104696859564200_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"25kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/677188189104696859564200_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/165268111319512662259174_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"19kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/165268111319512662259174_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/183861682115321737636075_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"16kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/183861682115321737636075_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/209636224883257434873210_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"22kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/209636224883257434873210_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/613490401485519279904600_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"21kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/613490401485519279904600_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/973421549384124627194600_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"20kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/973421549384124627194600_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/103415878141517397689040_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"18kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/103415878141517397689040_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/874812982127994638116750_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"23kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/874812982127994638116750_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/299521442384832985226700_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"31kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/299521442384832985226700_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/970478405999096697242500_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"20kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/970478405999096697242500_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/381378146241206027873200_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"33kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/381378146241206027873200_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/815691648173584685513900_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"15kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/815691648173584685513900_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/715947388156906411646530_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"28kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/715947388156906411646530_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p></div>',
@@ -176,7 +176,7 @@ VALUES ('2', '险种2', '11.00', '1193',
 INSERT INTO `sp_goods`
 VALUES ('3', '险种3', '39.00', '1195',
         '<div></div>',
-        '0', '1514255872','1514255872', null, '1157', '1174', '1195', '0');
+        '0', '1514255872', '1514255872', null, '1157', '1174', '1195', '0');
 
 -- ----------------------------
 -- Table structure for sp_goods_attr
@@ -264,30 +264,30 @@ VALUES ('500', 'admin', '123456', '1486720211', '0', '12345678', 'adsfad@qq.com'
 DROP TABLE IF EXISTS `sp_order`;
 CREATE TABLE `sp_order`
 (
-    `order_id`     int(10) unsigned       NOT NULL AUTO_INCREMENT COMMENT '主键id',
-    `user_id`      mediumint(8) unsigned  NOT NULL COMMENT '投保人id',
-    `seller_id`    mediumint(8) unsigned  NOT NULL COMMENT '被投保人id',
-    `order_kind`   varchar(32)            NOT NULL COMMENT '保险种类',
-    `order_number` varchar(32)            NOT NULL COMMENT '订单编号',
-    `order_price`  decimal(10, 2)         NOT NULL DEFAULT '0.00' COMMENT '订单总金额',
-    `order_pay`    enum ('1','2','3') NOT NULL DEFAULT '1' COMMENT '支付方式  1支付宝  2微信  3银行卡',
-    `pay_status`   enum ('0','1')         NOT NULL DEFAULT '0' COMMENT '订单状态： 0未付款、1已付款',
-    `create_time`  int(10) unsigned       NOT NULL COMMENT '记录生成时间',
-    `update_time`  int(10) unsigned       NOT NULL COMMENT '记录修改时间',
+    `order_id`      int(10) unsigned   NOT NULL AUTO_INCREMENT COMMENT '主键id',
+    `user_num`      varchar(32)        NOT NULL COMMENT '投保人身份证号',
+    `seller_num`    varchar(32)        NOT NULL COMMENT '被投保人身份证号',
+    `order_kind`    varchar(32)        NOT NULL COMMENT '保险种类',
+    `order_number`  varchar(32)        NOT NULL COMMENT '订单编号',
+    `order_price`   decimal(10, 2)     NOT NULL DEFAULT '0.00' COMMENT '订单总金额',
+    `order_pay`     enum ('1','2','3') NOT NULL DEFAULT '1' COMMENT '支付方式  1支付宝  2微信  3银行卡',
+    `pay_status`    enum ('0','1')     NOT NULL DEFAULT '0' COMMENT '订单状态： 0正常、1逾期',
+    `create_time`   varchar(30)        NOT NULL COMMENT '记录生成时间',
+    `update_time`   varchar(30)        NOT NULL COMMENT '记录修改时间',
+    `next_pay_time` varchar(30)        NOT NULL COMMENT '下次缴费时间',
     PRIMARY KEY (`order_id`),
-    UNIQUE KEY `order_number` (`order_number`),
-    KEY `add_time` (`create_time`)
+    UNIQUE KEY `order_number` (`order_number`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 50
+  AUTO_INCREMENT = 3
   DEFAULT CHARSET = utf8 COMMENT ='订单表';
 
 -- ----------------------------
 -- Records of sp_order
 -- ----------------------------
 INSERT INTO `sp_order`
-VALUES ('22', '1', '1','人寿' ,'itcast-59e411eaaccc9', '222.00', '2', '1', '1508119018', '1508119018');
+VALUES ('22', '310101198710279976', '31010119910722661X', '人寿', 'itcast-59e411eaaccc9', '222.00', '2', '0', '2008-11-20', '2021-11-10', '2022-11-20');
 INSERT INTO `sp_order`
-VALUES ('23', '2', '2', '车险','itcast-59e71b546d30a', '805.00', '1', '0', '1508318036', '1508318036');
+VALUES ('23', '310101199808099875', '310101199107226615', '车险', 'itcast-59e71b546d30a', '805.00', '1', '0', '2016-10-31', '2021-10-31', '2022-10-31');
 
 -- ----------------------------
 -- Table structure for sp_order_goods
@@ -382,10 +382,10 @@ INSERT INTO `sp_permission`
 VALUES ('152', '更新保险状态', '104', '', '', '2');
 INSERT INTO `sp_permission`
 VALUES ('153', '获取保险详情', '104', '', '', '2');
-INSERT INTO  `sp_permission`
-VALUES ('154','添加保单','107','','','2');
-INSERT INTO  `sp_permission`
-VALUES ('155','删除保单','107','','','2');
+INSERT INTO `sp_permission`
+VALUES ('154', '添加保单', '107', '', '', '2');
+INSERT INTO `sp_permission`
+VALUES ('155', '删除保单', '107', '', '', '2');
 INSERT INTO `sp_permission`
 VALUES ('156', '保单更新', '107', '', '', '2');
 INSERT INTO `sp_permission`
@@ -724,7 +724,7 @@ CREATE TABLE `sp_user`
     `update_time`   int(11)          NOT NULL COMMENT '修改时间',
     PRIMARY KEY (`user_id`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 12
+  AUTO_INCREMENT = 3
   DEFAULT CHARSET = utf8 COMMENT ='投保人表';
 
 -- ----------------------------
@@ -734,7 +734,7 @@ INSERT INTO `sp_user`
 VALUES ('1', '310101198710279976', '胡超', '1987-10-27', '上海市', '18789276493',
         'user_test1', '123321', 'w@zce.me', '男', null, '本科', '1512033129', '1512033129');
 INSERT INTO `sp_user`
-VALUES ('2', '31010119910722661X', '陈冬', '1986-11-05', '上海市', '18763524951',
+VALUES ('2', '310101199808099875', '陈冬', '1986-11-05', '上海市', '18763524951',
         'user_test2', 'zzzzzz', 'asd@asd.cc', '男', '1000001', '博士', '1512122098', '1512122098');
 
 -- ----------------------------
@@ -759,7 +759,7 @@ CREATE TABLE `sp_seller`
     `update_time`     int(11)          NOT NULL COMMENT '修改时间',
     PRIMARY KEY (`seller_id`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 12
+  AUTO_INCREMENT = 3
   DEFAULT CHARSET = utf8 COMMENT ='被投保人表';
 
 -- ----------------------------
@@ -769,7 +769,7 @@ INSERT INTO `sp_seller`
 VALUES ('1', '31010119910722661X', '占徐平', '1991-07-22', '上海市', '15365849214',
         'seller_test1', '123321', 'sad@dd.me', '男', null, '本科', '1512233129', '1512333129');
 INSERT INTO `sp_seller`
-VALUES ('2', '31010119910722661X', '陈冬', '1986-11-05', '上海市', '18763524951',
+VALUES ('2', '310101199107226615', '陈冬', '1986-11-05', '上海市', '18763524951',
         'seller_test2', 'zzzzzz', 'afff@qrw.cc', '男', '1000001', '博士', '1512124098', '1512126098');
 
 

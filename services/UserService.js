@@ -35,6 +35,7 @@ module.exports.getAllUsers = function (conditions, cb) {
         limit = pagesize;
 
         usersDAO.findUserByKey(key, offset, limit, function (err, users) {
+            console.log(users);
             var retUsers = [];
             for (idx in users) {
                 var user = users[idx];
