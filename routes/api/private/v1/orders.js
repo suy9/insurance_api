@@ -38,8 +38,8 @@ router.post("/",
     // 参数验证
     function (req, res, next) {
     console.log(req.body);
-        if (!req.body.user_id) return res.sendResult(null, 400, "user_id 参数错误");
-        if (!req.body.seller_id) return res.sendResult(null, 400, "seller_id 参数错误");
+        if (!req.body.user_num) return res.sendResult(null, 400, "user_id 参数错误");
+        if (!req.body.seller_num) return res.sendResult(null, 400, "seller_id 参数错误");
         if (!req.body.order_kind) return res.sendResult(null, 400, "order_kind 参数错误");
         if (!req.body.order_number) return res.sendResult(null, 400, "order_number 参数错误");
         if (req.body.order_price <= 0) return res.sendResult(null, 400, "order_price 参数错误");
@@ -50,8 +50,8 @@ router.post("/",
     // 业务逻辑
     function (req, res, next) {
         params = {
-            "user_id": req.body.user_id,
-            "seller_id": req.body.seller_id,
+            "user_num": req.body.user_num,
+            "seller_num": req.body.seller_num,
             "order_kind": req.body.order_kind,
             "order_number": req.body.order_number,
             "order_price": req.body.order_price,

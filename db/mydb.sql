@@ -763,7 +763,7 @@ CREATE TABLE `sp_seller`
   DEFAULT CHARSET = utf8 COMMENT ='被投保人表';
 
 -- ----------------------------
--- Records of sp_user
+-- Records of sp_seller
 -- ----------------------------
 INSERT INTO `sp_seller`
 VALUES ('1', '31010119910722661X', '占徐平', '1991-07-22', '上海市', '15365849214',

@@ -90,8 +90,8 @@ module.exports.createOrder = function (params, cb) {
         }
 
         orderDAO.create({
-            "user_id": params.user_id,
-            "seller_id": params.seller_id,
+            "user_num": params.user_num,
+            "seller_num": params.seller_num,
             "order_kind": params.order_kind,
             "order_number": params.order_number,
             "order_price": params.order_price,
