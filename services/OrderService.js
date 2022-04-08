@@ -1,10 +1,6 @@
-var _ = require('lodash');
 var path = require("path");
-var orm = require("orm");
 var orderDAO = require(path.join(process.cwd(), "dao/OrderDAO"));
 
-var Promise = require("bluebird");
-var uniqid = require('uniqid');
 
 /**
  * 获取所有保单
@@ -40,9 +36,11 @@ module.exports.getAllOrders = function (conditions, cb) {
             for (idx in orders) {
                 var order = orders[idx];
 
+                console.log(orders);
                 retOrders.push({
                     "id": order.order_id,
                     "user_id": order.user_id,
+
                     "seller_id": order.seller_id,
                     "order_kind": order.order_kind,
                     "order_number": order.order_number,
@@ -70,7 +68,7 @@ module.exports.getAllOrders = function (conditions, cb) {
  */
 module.exports.createOrder = function (params, cb) {
 
-    orderDAO.exists(params.order_number, function (err, exists) {
+    orderDAO.exists(params.order_number, function (err,isExists) {
         if (err) return cb(err);
 
         if (isExists) {
@@ -85,8 +83,8 @@ module.exports.createOrder = function (params, cb) {
             "order_price": params.order_price,
             "order_pay": params.order_pay,
             "pay_status": params.pay_status,
-            "create_time": (Date.parse(new Date()) / 1000).toString(),
-            "update_time": (Date.parse(new Date()) / 1000).toString(),
+            "create_time": (Date.parse(new Date()) / 1000),
+            "update_time": (Date.parse(new Date()) / 1000),
         }, function (err, order) {
             if (err) return cb(err);
             result = {
@@ -123,7 +121,7 @@ module.exports.updateOrder = function (params, cb) {
             "order_price": params.order_price,
             "order_pay": params.order_pay,
             "pay_status": params.pay_status,
-            "update_time": (Date.parse(new Date()) / 1000).toString(),
+            "update_time": (Date.parse(new Date()) / 1000),
         },
         function (err, order) {
             if (err) return cb(err);

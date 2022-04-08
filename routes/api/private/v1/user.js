@@ -29,7 +29,6 @@ router.get("/",
             function(err,result){
                 if(err) return res.sendResult(null,400,err);
                 res.sendResult(result,200,"获取投保人列表成功");
-                console.log(result);
             }
         )(req,res,next);
 
@@ -40,7 +39,8 @@ router.get("/",
 router.get("/:id",
     // 参数验证
     function(req,res,next) {
-        if(!req.params.id) {
+    console.log(req.params)
+    if(!req.params.id) {
             return res.sendResult(null,400,"投保人ID不能为空");
         }
         if(isNaN(parseInt(req.params.id))) return res.sendResult(null,400,"投保人ID必须是数字");

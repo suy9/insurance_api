@@ -43,6 +43,7 @@ module.exports.getAllManagers = function (conditions, cb) {
                 if (!manager.role_id) {
                     role_name = "超级管理员"
                 }
+                console.log(managers);
                 retManagers.push({
                     "id": manager.mg_id,
                     "role_name": role_name,

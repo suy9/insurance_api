@@ -60,6 +60,7 @@ router.put("/:id",
 		if(!req.params.id) {
 			return res.sendResult(null,400,"商品ID不能为空");
 		}
+		console.log(req.params);
 		if(isNaN(parseInt(req.params.id))) return res.sendResult(null,400,"商品ID必须是数字");
 		next();
 	},
@@ -92,8 +93,6 @@ router.get("/:id",
 	}
 );
 
-
-
 // 删除商品
 router.delete("/:id",
 	// 参数验证
@@ -113,78 +112,6 @@ router.delete("/:id",
 				return res.sendResult(null,200,"删除成功");
 		})(req,res,next);
 	}
-);
-
-// 更新商品的图片
-router.put("/:id/pics",
-	// 参数验证
-	function(req,res,next) {
-		if(!req.params.id) {
-			return res.sendResult(null,400,"商品ID不能为空");
-		}
-		if(isNaN(parseInt(req.params.id))) return res.sendResult(null,400,"商品ID必须是数字");
-		next();
-	},
-	// 业务逻辑
-	function(req,res,next) {
-
-		goodServ.updateGoodPics(
-			req.params.id,
-			req.body,
-			function(err,good){
-				if(err) return res.sendResult(null,400,err);
-				res.sendResult(good,200,"更新成功");
-			}
-		)(req,res,next);
-	}
-);
-
-// 更新商品的属性
-router.put("/:id/attributes",
-	// 参数验证
-	function(req,res,next) {
-		if(!req.params.id) {
-			return res.sendResult(null,400,"商品ID不能为空");
-		}
-		if(isNaN(parseInt(req.params.id))) return res.sendResult(null,400,"商品ID必须是数字");
-		next();
-	},
-	// 业务逻辑
-	function(req,res,next) {
-
-		goodServ.updateGoodAttributes (
-			req.params.id,
-			req.body,
-			function(err,good){
-				if(err) return res.sendResult(null,400,err);
-				res.sendResult(good,200,"更新成功");
-			}
-		)(req,res,next);
-	}
-);
-
-// 更新商品状态
-router.put("/:id/state/:state",
-	// 参数验证
-	function(req,res,next) {
-		if(!req.params.id) {
-			return res.sendResult(null,400,"商品ID不能为空");
-		}
-		if(isNaN(parseInt(req.params.id))) return res.sendResult(null,400,"商品ID必须是数字");
-		if(!req.params.state) {
-			return res.sendResult(null,400,"状态值不能为空");
-		}
-		if(req.params.state != 0 && req.params.state != 1 && req.params.state != 2) {
-			return res.sendResult(null,400,"状态值只能为 0 ，1 或 2");
-		}
-		next();
-	},
-	function(req,res,next) {
-		goodServ.updateGoodsState(req.params.id,req.params.state,function(err,good){
-			if(err) return res.sendResult(null,400,err);
-			res.sendResult(good,200,"更新成功");
-		})(req,res,next);
-}
 );
 
 module.exports = router;

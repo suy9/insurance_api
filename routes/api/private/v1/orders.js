@@ -28,7 +28,6 @@ router.get("/",
             function (err, result) {
                 if (err) return res.sendResult(null, 400, err);
                 res.sendResult(result, 200, "获取保单列表成功");
-                console.log(result);
             },
         )(req, res, next);
     }
@@ -50,13 +49,13 @@ router.post("/",
     // 业务逻辑
     function (req, res, next) {
         params = {
-            user_id: req.body.user_id,
-            seller_id: req.body.seller_id,
-            order_kind: req.body.order_kind,
-            order_number: req.body.order_number,
-            order_price: req.body.order_price,
-            order_pay: req.body.order_pay,
-            pay_status: req.body.pay_status
+            "user_id": req.body.user_id,
+            "seller_id": req.body.seller_id,
+            "order_kind": req.body.order_kind,
+            "order_number": req.body.order_number,
+            "order_price": req.body.order_price,
+            "order_pay": req.body.order_pay,
+            "pay_status": req.body.pay_status
         }
         orderServ.createOrder(params, function (err, result) {
                 if (err) return res.sendResult(null, 400, err);
@@ -110,12 +109,23 @@ router.delete("/:id",
 
 
 
-router.get("/:id", function (req, res, next) {
-    orderServ.getOrder(req.params.id, function (err, result) {
-        if (err) return res.sendResult(null, 400, err);
-        return res.sendResult(result, 200, "获取成功");
-    })(req, res, next);
-});
+router.get("/:id",
+    // 参数验证
+    function (req, res, next) {
+    console.log(req.pa)
+    if (!req.params.id) {
+        return res.sendResult(null, 400, "保单id不能为空");
+    }
+    if (isNaN(parseInt(req.params.id))) return res.sendResult(null, 400, "保单id必须为数字");
+    next();
+    },
+    function (req,res,next) {
+        orderServ.getOrder(req.params.id, function (err, result) {
+            if (err) return res.sendResult(null, 400, err);
+            res.sendResult(result, 200, "获取保单成功");
+        }) (req, res, next);
+    }
+);
 
 
 module.exports = router;

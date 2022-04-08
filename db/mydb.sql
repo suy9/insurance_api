@@ -140,25 +140,26 @@ VALUES ('40', '空调回收', '4', '2', '0', 'full/da07de0ac2f01b18a9ec206fd44a5
 DROP TABLE IF EXISTS `sp_goods`;
 CREATE TABLE `sp_goods`
 (
-    `goods_id`        mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
-    `goods_name`      varchar(255)          NOT NULL COMMENT '保险名称',
-    `goods_price`     decimal(10, 2)        NOT NULL DEFAULT '0.00' COMMENT '保险价格',
-    `cat_id`          smallint(5) unsigned  NOT NULL DEFAULT '0' COMMENT '类型id',
-    `goods_introduce` text COMMENT '商品详情介绍',
-    `is_del`          enum ('0','1')        NOT NULL DEFAULT '0' COMMENT '0:正常  1:删除',
-    `add_time`        int(11)               NOT NULL COMMENT '添加商品时间',
-    `upd_time`        int(11)               NOT NULL COMMENT '修改商品时间',
-    `delete_time`     int(11)                        DEFAULT NULL COMMENT '软删除标志字段',
-    `cat_one_id`      smallint(5)                    DEFAULT '0' COMMENT '一级分类id',
-    `cat_two_id`      smallint(5)                    DEFAULT '0' COMMENT '二级分类id',
-    `cat_three_id`    smallint(5)                    DEFAULT '0' COMMENT '三级分类id',
+    `goods_id`         mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
+    `goods_name`       varchar(255)          NOT NULL COMMENT '保险名称',
+    `goods_price`      decimal(10, 2)        NOT NULL DEFAULT '0.00' COMMENT '保险价格',
+    `cat_id`           smallint(5) unsigned  NOT NULL DEFAULT '0' COMMENT '类型id',
+    `goods_introduce`  text COMMENT '商品详情介绍',
+    `is_del`           enum ('0','1')        NOT NULL DEFAULT '0' COMMENT '0:正常  1:删除',
+    `add_time`         int(11)               NOT NULL COMMENT '添加商品时间',
+    `upd_time`         int(11)               NOT NULL COMMENT '修改商品时间',
+    `delete_time`      int(11)                        DEFAULT NULL COMMENT '软删除标志字段',
+    `cat_one_id`       smallint(5)                    DEFAULT '0' COMMENT '一级分类id',
+    `cat_two_id`       smallint(5)                    DEFAULT '0' COMMENT '二级分类id',
+    `cat_three_id`     smallint(5)                    DEFAULT '0' COMMENT '三级分类id',
+    `goods_state`      int(11)                        DEFAULT '0' COMMENT '商品状态 0: 未通过 1: 审核中 2: 已审核',
     PRIMARY KEY (`goods_id`),
     UNIQUE KEY `goods_name` (`goods_name`),
     KEY `goods_price` (`goods_price`),
     KEY `add_time` (`add_time`),
     KEY `goods_name_2` (`goods_name`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 10
+  AUTO_INCREMENT = 88
   DEFAULT CHARSET = utf8 COMMENT ='险种表';
 
 -- ----------------------------
@@ -166,13 +167,16 @@ CREATE TABLE `sp_goods`
 -- ----------------------------
 INSERT INTO `sp_goods`
 VALUES ('1', '险种1', '49.00', '1191',
-        'test',
-        '0', '1514255862', '1514255862', null, '1', '3', '4');
+        '<div class="lazyimg"><div moduleid="R9000475_3" modulename="商品详情"><p><img data-src="//image.suning.cn/uimg/sop/commodity/138920341921275653753268_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/138920341921275653753268_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/320294018209000122936780_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/320294018209000122936780_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/704928021836697029300000_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/704928021836697029300000_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/674563845781283224909500_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/674563845781283224909500_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/151134588018743970526002_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/151134588018743970526002_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/831318046793946113206000_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/831318046793946113206000_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/916281915185884963655750_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/916281915185884963655750_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/472343017167947876723490_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/472343017167947876723490_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/942767809372154340834000_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/942767809372154340834000_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/163812559664514099011170_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/163812559664514099011170_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/697203950107440612220250_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/697203950107440612220250_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/697247714477543390785500_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/697247714477543390785500_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/161411030914914658667827_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/161411030914914658667827_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/669094843119273038295020_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/669094843119273038295020_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/362990339109906307146490_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/362990339109906307146490_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/200766730097564804937320_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/200766730097564804937320_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/357686216186091569615500_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/357686216186091569615500_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/206539641915557176577986_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/206539641915557176577986_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/106568805613403252031066_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/106568805613403252031066_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/562575204157804367889930_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/562575204157804367889930_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/201136725963941859463860_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/201136725963941859463860_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/174343734111585091167516_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/174343734111585091167516_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/174437664961525990196410_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/174437664961525990196410_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"><img data-src="//image.suning.cn/uimg/sop/commodity/852602712102381755560600_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/852602712102381755560600_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"></p></div><div moduleid="R9000475_4" modulename="商品尺码表"><p><img data-src="//image.suning.cn/uimg/sop/commodity/191351338116998619431514_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/191351338116998619431514_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"></p></div><div moduleid="R9000475_5" modulename="模特效果"><p><img data-src="//image.suning.cn/uimg/sop/commodity/378452992490143925172200_x.jpg?from=mobile&amp;format=80q.webp" alt="" src="//image.suning.cn/uimg/sop/commodity/378452992490143925172200_x.jpg?from=mobile&format=80q.webp" width="100%" height="auto"></p></div></div>',
+        '0','1514255862','1514255862',null,'1157','1174','1191','0');
 INSERT INTO `sp_goods`
 VALUES ('2', '险种2', '11.00', '1193',
-        'test',
-        '0', '1514255865', '1514255865', null, '1', '3', '5');
-
+        '<div class=\"lazyimg\"><p><img data-src=\"//image.suning.cn/uimg/sop/commodity/689982530173400477121750_x.jpg?from=mobile&amp;format=80q.webp\" alt=\"\" src=\"//image.suning.cn/uimg/sop/commodity/689982530173400477121750_x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p>邦诺姿 情趣内衣无痕蕾丝提臀诱惑丁字裤中腰档纯棉内裤女低腰三角裤</p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/549576726132196462330130_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"25kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/549576726132196462330130_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/104343487925972960976710_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"15kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/104343487925972960976710_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/677188189104696859564200_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"25kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/677188189104696859564200_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/165268111319512662259174_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"19kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/165268111319512662259174_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/183861682115321737636075_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"16kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/183861682115321737636075_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/209636224883257434873210_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"22kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/209636224883257434873210_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/613490401485519279904600_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"21kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/613490401485519279904600_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/973421549384124627194600_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"20kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/973421549384124627194600_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/103415878141517397689040_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"18kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/103415878141517397689040_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/874812982127994638116750_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"23kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/874812982127994638116750_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/299521442384832985226700_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"31kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/299521442384832985226700_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/970478405999096697242500_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"20kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/970478405999096697242500_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/381378146241206027873200_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"33kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/381378146241206027873200_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/815691648173584685513900_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"15kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/815691648173584685513900_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p><p><img data-src=\"//image.suning.cn/uimg/sop/phonecomm/715947388156906411646530_640x.jpg?from=mobile&amp;format=80q.webp\" picsize=\"28kb\" src=\"//image.suning.cn/uimg/sop/phonecomm/715947388156906411646530_640x.jpg?from=mobile&format=80q.webp\" width=\"100%\" height=\"auto\"></p></div>',
+        '0', '1514255865', '1514255865', null, '1157', '1174', '1193', '0');
+INSERT INTO `sp_goods`
+VALUES ('3', '险种3', '39.00', '1195',
+        '<div></div>',
+        '0', '1514255872','1514255872', null, '1157', '1174', '1195', '0');
 
 -- ----------------------------
 -- Table structure for sp_goods_attr
@@ -337,15 +341,13 @@ CREATE TABLE `sp_permission`
 INSERT INTO `sp_permission`
 VALUES ('101', '险种管理', '0', '', '', '0');
 INSERT INTO `sp_permission`
-VALUES ('102', '订单管理', '0', '', 'order', '0');
+VALUES ('102', '订单管理', '0', '', '', '0');
 INSERT INTO `sp_permission`
 VALUES ('104', '险种列表', '101', 'Goods', 'index', '1');
 INSERT INTO `sp_permission`
 VALUES ('105', '添加险种', '104', 'Goods', 'tianjia', '2');
 INSERT INTO `sp_permission`
 VALUES ('107', '订单列表', '102', 'Order', 'index', '1');
-INSERT INTO `sp_permission`
-VALUES ('109', '添加订单', '107', 'Order', 'tianjia', '2');
 INSERT INTO `sp_permission`
 VALUES ('110', '用户列表', '125', 'Manager', 'index', '1');
 INSERT INTO `sp_permission`
@@ -380,10 +382,14 @@ INSERT INTO `sp_permission`
 VALUES ('152', '更新保险状态', '104', '', '', '2');
 INSERT INTO `sp_permission`
 VALUES ('153', '获取保险详情', '104', '', '', '2');
+INSERT INTO  `sp_permission`
+VALUES ('154','添加保单','107','','','2');
+INSERT INTO  `sp_permission`
+VALUES ('155','删除保单','107','','','2');
 INSERT INTO `sp_permission`
-VALUES ('154', '订单更新', '107', '', '', '2');
+VALUES ('156', '保单更新', '107', '', '', '2');
 INSERT INTO `sp_permission`
-VALUES ('155', '获取订单详情', '107', '', '', '2');
+VALUES ('157', '获取订单详情', '107', '', '', '2');
 INSERT INTO `sp_permission`
 VALUES ('159', '设置管理状态', '110', '', '', '2');
 -- user
@@ -504,13 +510,13 @@ VALUES ('52', '152', 'GoodService', 'updateGoodsState', 'goods', null);
 INSERT INTO `sp_permission_api`
 VALUES ('53', '153', 'GoodService', 'getGoodById', 'goods', null);
 INSERT INTO `sp_permission_api`
-VALUES ('54', '154', 'OrderService', 'updateOrder', 'orders', null);
+VALUES ('54', '154', 'OrderService', 'createOrder', 'orders', null);
 INSERT INTO `sp_permission_api`
-VALUES ('55', '155', 'OrderService', 'getOrder', 'orders', null);
+VALUES ('55', '155', 'OrderService', 'deleteOrder', 'orders', null);
 INSERT INTO `sp_permission_api`
-VALUES ('56', '156', 'CategoryService', 'createAttribute', 'categories', null);
+VALUES ('56', '156', 'OrderService', 'updateOrder', 'orders', null);
 INSERT INTO `sp_permission_api`
-VALUES ('57', '157', 'CategoryService', 'deleteAttribute', 'categories', null);
+VALUES ('57', '157', 'OrderService', 'getOrder', 'categories', null);
 INSERT INTO `sp_permission_api`
 VALUES ('58', '158', 'CategoryService', 'attributeById', 'categories', null);
 INSERT INTO `sp_permission_api`

@@ -13,6 +13,7 @@ module.exports = function(db,callback){
 		cat_one_id : Number,
 		cat_two_id : Number,
 		cat_three_id : Number,
+		goods_state : Number	// 0：未审核 1: 审核中 2: 已审核
 	},{
 		table : "sp_goods",
 		methods: {
