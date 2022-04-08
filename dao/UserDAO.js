@@ -1,6 +1,6 @@
 var path = require("path");
 daoModule = require("./DAO");
-databaseModule = require(path.join(process.cwd(), "modules/database"));
+databaseModule = require(path.join(process.cwd(),"modules/database"));
 
 /**
  * 创建投保人
@@ -8,8 +8,8 @@ databaseModule = require(path.join(process.cwd(), "modules/database"));
  * @param  {[type]}   obj 投保人信息
  * @param  {Function} cb  回调函数
  */
-module.exports.create = function (obj, cb) {
-    daoModule.create("UserModel", obj, cb);
+module.exports.create = function(obj,cb) {
+    daoModule.create("UserModel",obj,cb);
 }
 
 /**
@@ -18,10 +18,10 @@ module.exports.create = function (obj, cb) {
  * @param  {[type]}   conditions 查询条件
  * @param  {Function} cb         回调函数
  */
-module.exports.list = function (conditions, cb) {
-    daoModule.list("UserModel", conditions, function (err, models) {
-        if (err) return cb(err, null);
-        cb(null, models);
+module.exports.list = function(conditions,cb) {
+    daoModule.list("UserModel",conditions,function(err,models) {
+        if(err) return cb(err,null);
+        cb(null,models);
     });
 }
 
@@ -31,8 +31,8 @@ module.exports.list = function (conditions, cb) {
  * @param  {[type]}   conditions 条件
  * @param  {Function} cb         回调函数
  */
-module.exports.findOne = function (conditions, cb) {
-    daoModule.findOne("UserModel", conditions, cb);
+module.exports.findOne = function(conditions,cb) {
+    daoModule.findOne("UserModel",conditions,cb);
 }
 
 /**
@@ -43,23 +43,23 @@ module.exports.findOne = function (conditions, cb) {
  * @param  {[type]}   limit
  * @param  {Function} cb     回调函数
  */
-module.exports.findUserByKey = function (key, offset, limit, cb) {
+module.exports.findUserByKey = function(key,offset,limit,cb) {
     db = databaseModule.getDatabase();
-    sql = "SELECT * FROM sp_user ";
+    sql = "SELECT * FROM sp_user";
 
-    if (key) {
-        sql += " WHERE user_name LIKE ? LIMIT ?,?";
+    if(key) {
+        sql += " WHERE user_name LIKE ? OR user_num LIKE ? LIMIT ?,?";
         database.driver.execQuery(
             sql
-            , ["%" + key + "%", offset, limit], function (err, users) {
-                if (err) return cb("查询执行出错");
-                cb(null, users);
+            ,["%" + key + "%","%" + key + "%",offset,limit],function(err,users){
+                if(err) return cb("查询执行出错");
+                cb(null,users);
             });
     } else {
         sql += " LIMIT ?,? ";
-        database.driver.execQuery(sql, [offset, limit], function (err, users) {
-            if (err) return cb("查询执行出错");
-            cb(null, users);
+        database.driver.execQuery(sql,[offset,limit],function(err,users){
+            if(err) return cb("查询执行出错");
+            cb(null,users);
         });
     }
 }
@@ -71,12 +71,12 @@ module.exports.findUserByKey = function (key, offset, limit, cb) {
  * @param  {Function} cb       回调函数
  *
  */
-module.exports.exists = function (username, cb) {
+module.exports.exists = function(username,cb) {
     var db = databaseModule.getDatabase();
     var Model = db.models.UserModel;
-    Model.exists({"user_name": username}, function (err, isExists) {
-        if (err) return cb("查询失败");
-        cb(null, isExists);
+    Model.exists({"user_name":username},function(err,isExists){
+        if(err) return cb("查询失败");
+        cb(null,isExists);
     });
 }
 
@@ -86,21 +86,21 @@ module.exports.exists = function (username, cb) {
  * @param  {[type]}   key 关键词
  * @param  {Function} cb  回调函数
  */
-module.exports.countUserByKey = function (key, cb) {
+module.exports.countUserByKey = function(key,cb) {
     db = databaseModule.getDatabase();
     sql = "SELECT count(*) as count FROM sp_user";
-    if (key) {
+    if(key) {
         sql += " WHERE user_name LIKE ?";
         database.driver.execQuery(
             sql
-            , ["%" + key + "%"], function (err, result) {
-                if (err) return cb("查询执行出错");
-                cb(null, result[0]["count"]);
+            ,["%" + key + "%"],function(err,result){
+                if(err) return cb("查询执行出错");
+                cb(null,result[0]["count"]);
             });
     } else {
-        database.driver.execQuery(sql, function (err, result) {
-            if (err) return cb("查询执行出错");
-            cb(null, result[0]["count"]);
+        database.driver.execQuery(sql,function(err,result){
+            if(err) return cb("查询执行出错");
+            cb(null,result[0]["count"]);
         });
     }
 
@@ -113,8 +113,8 @@ module.exports.countUserByKey = function (key, cb) {
  * @param  {[type]}   id 投保人主键ID
  * @param  {Function} cb 回调函数
  */
-module.exports.show = function (id, cb) {
-    daoModule.show("UserModel", id, cb);
+module.exports.show = function(id,cb) {
+    daoModule.show("UserModel",id,cb);
 }
 
 /**
@@ -123,8 +123,8 @@ module.exports.show = function (id, cb) {
  * @param  {[type]}   obj 投保人对象
  * @param  {Function} cb  回调函数
  */
-module.exports.update = function (obj, cb) {
-    daoModule.update("UserModel", obj.user_id, obj, cb);
+module.exports.update = function(obj,cb) {
+    daoModule.update("UserModel",obj.user_id,obj,cb);
 }
 
 /**
@@ -133,9 +133,9 @@ module.exports.update = function (obj, cb) {
  * @param  {[type]}   id 主键ID
  * @param  {Function} cb 回调函数
  */
-module.exports.destroy = function (id, cb) {
-    daoModule.destroy("UserModel", id, function (err) {
-        if (err) return cb(err);
+module.exports.destroy = function(id,cb) {
+    daoModule.destroy("UserModel",id,function(err){
+        if(err) return cb(err);
         return cb(null);
     });
 }
@@ -146,12 +146,12 @@ module.exports.destroy = function (id, cb) {
  * @param  {[type]}   obj 投保人对象
  * @param  {Function} cb  回调函数
  */
-module.exports.save = function (obj, cb) {
-    daoModule.show(obj.user_id, function (err, oldObj) {
-        if (err) {
-            daoModule.create("UserModel", obj, cb);
+module.exports.save = function(obj,cb) {
+    daoModule.show(obj.user_id,function(err,oldObj){
+        if(err) {
+            daoModule.create("UserModel",obj,cb);
         } else {
-            daoModule.update("UserModel", obj.user_id, obj, cb);
+            daoModule.update("UserModel",obj.user_id,obj,cb);
         }
     })
 }
@@ -161,6 +161,6 @@ module.exports.save = function (obj, cb) {
  *
  * @param  {Function} cb 回调函数
  */
-module.exports.count = function (cb) {
-    daoModule("UserModel", cb);
+module.exports.count = function(cb) {
+    daoModule("UserModel",cb);
 }

@@ -35,8 +35,6 @@ module.exports.getAllOrders = function (conditions, cb) {
             var retOrders = [];
             for (idx in orders) {
                 var order = orders[idx];
-
-                console.log(orders);
                 retOrders.push({
                     "id": order.order_id,
                     "user_id": order.user_id,

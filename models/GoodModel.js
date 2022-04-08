@@ -7,8 +7,8 @@ module.exports = function(db,callback){
 		cat_id : Number,
 		goods_introduce : String,
 		is_del : ['0','1'],	// 0: 正常 , 1: 删除
-		add_time : Number,
-		upd_time : Number,
+		add_time : Date,
+		upd_time : Date,
 		delete_time : Number,
 		cat_one_id : Number,
 		cat_two_id : Number,
