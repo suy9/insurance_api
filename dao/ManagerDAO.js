@@ -46,7 +46,6 @@ module.exports.findOne = function(conditions,cb) {
 module.exports.findByKey = function(key,offset,limit,cb) {
 	db = databaseModule.getDatabase();
 	sql = "SELECT * FROM sp_manager as mgr LEFT JOIN sp_role as role ON mgr.role_id = role.role_id";
-
 	if(key) {
 		sql += " WHERE mg_name LIKE ? LIMIT ?,?";
 		database.driver.execQuery(
@@ -54,6 +53,7 @@ module.exports.findByKey = function(key,offset,limit,cb) {
 		,["%" + key + "%",offset,limit],function(err,managers){
 			if(err) return cb("查询执行出错");
 			cb(null,managers);
+			console.log(managers);
 		});
 	} else {
 		sql += " LIMIT ?,? ";

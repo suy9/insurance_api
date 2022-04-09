@@ -8,7 +8,6 @@ var authorization = require(path.join(process.cwd(),"/modules/authorization"));
 // 通过验证模块获取用户管理服务
 var mgrServ = authorization.getService("ManagerService");
 
-
 // 查询用户列表
 router.get("/",
 	// 验证参数

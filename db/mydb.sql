@@ -274,7 +274,10 @@ VALUES ('173', '更新用户', '113', '', '', '2');
 INSERT INTO `sp_permission`
 VALUES ('176', '获取用户详情', '113', '', '', '2');
 INSERT INTO `sp_permission`
-VALUES ('177', '删除订单', '107', 'Order', 'del', '2');
+VALUES ('177', '删除订单', '107', '', '', '2');
+
+INSERT INTO `sp_permission`
+VALUES ('178', '续期拜访', '102', 'Renewal', '', '1');
 
 -- ----------------------------
 -- Table structure for sp_permission_api
@@ -406,7 +409,10 @@ VALUES ('73', '173', 'SellerService', 'updateSeller', 'sellers', null);
 INSERT INTO `sp_permission_api`
 VALUES ('76', '176', 'SellerService', 'getSeller', 'sellers', null);
 INSERT INTO `sp_permission_api`
-    VALUE  ('77', '177', 'OrderService', 'deleteOrder', 'orders', null);
+VALUE  ('77', '177', 'OrderService', 'deleteOrder', 'orders', null);
+-- renewal_permission
+INSERT INTO `sp_permission_api`
+VALUES ('78', '178', 'RenewalService', 'getRenewal', 'renewals', null);
 
 -- ----------------------------
 -- Table structure for sp_report_1

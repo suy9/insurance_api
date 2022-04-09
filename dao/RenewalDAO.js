@@ -45,6 +45,7 @@ module.exports.findOne = function (conditions, cb) {
  */
 
 module.exports.findOrderByKey = function (key, offset, limit, cb) {
+    console.log(key, offset, limit);
     db = databaseModule.getDatabase();
     sql = "SELECT sp_order.*,sp_user.user_name,sp_user.user_num,sp_user.user_birthday,sp_user.user_address,sp_user.user_phone,sp_seller.seller_name,sp_seller.seller_num,sp_seller.seller_birthday,sp_seller.seller_address,sp_seller.seller_phone  " +
         "FROM sp_order,sp_user,sp_seller " +
@@ -65,7 +66,7 @@ module.exports.findOrderByKey = function (key, offset, limit, cb) {
                 cb(null, orders);
             });
     } else {
-        sql += " LIMIT ?,? ";
+        sql += "AND sp_order.pay_status = '1' LIMIT ?,? ";
         database.driver.execQuery(sql, [offset, limit], function (err, orders) {
             if (err) return cb("查询执行出错");
             cb(null, orders);
@@ -96,9 +97,9 @@ module.exports.exists = function (username, cb) {
  * @param  {Function} cb  回调函数
  */
 module.exports.countOrderByKey = function (key, cb) {
-    console.log(typeof key);
+    console.log(key);
     db = databaseModule.getDatabase();
-    sql = "SELECT count(*) as count FROM sp_order";
+    sql = "SELECT count(*) as count FROM sp_order WHERE sp_order.pay_status = '1'";
     if (key) {
         // sql += " WHERE user_id LIKE ?";
         sql = "SELECT count(*) as count " +
