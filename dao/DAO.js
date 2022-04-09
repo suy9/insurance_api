@@ -1,12 +1,11 @@
 var path = require("path");
-
 // 获取数据库模型
-databaseModule = require(path.join(process.cwd(),"modules/database")); 
+databaseModule = require(path.join(process.cwd(),"modules/database"));
 var logger = require('../modules/logger').logger();
 
 /**
  * 创建对象数据
- * 
+ *
  * @param  {[type]}   modelName 模型名称
  * @param  {[type]}   obj       模型对象
  * @param  {Function} cb        回调函数
@@ -19,7 +18,7 @@ module.exports.create = function(modelName,obj,cb) {
 
 /**
  * 获取所有数据
- * 
+ *
  * @param  {[type]}   conditions 查询条件
  * 查询条件统一规范
  * conditions
@@ -32,7 +31,7 @@ module.exports.create = function(modelName,obj,cb) {
 		"omit" : ["字段"],
 		"only" : ["需要字段"],
 		"limit" : "",
-		"order" :[ 
+		"order" :[
 			"字段" , A | Z,
 			...
 		]
@@ -80,7 +79,7 @@ module.exports.list = function(modelName,conditions,cb) {
 	}
 
 	model.run(function(err,models) {
-		
+
 		if(err) {
 			console.log(err);
 			return cb("查询失败",null);
@@ -91,9 +90,7 @@ module.exports.list = function(modelName,conditions,cb) {
 
 module.exports.countByConditions = function(modelName,conditions,cb) {
 	var db = databaseModule.getDatabase();
-
 	var model = db.models[modelName];
-
 	if(!model) return cb("模型不存在",null);
 
 	var resultCB = function(err,count){
@@ -142,7 +139,7 @@ module.exports.findOne = function(modelName,conditions,cb) {
 
 /**
  * 更新对象数据
- * 
+ *
  * @param  {[type]}   modelName 模型名称
  * @param  {[type]}   id        数据关键ID
  * @param  {[type]}   updateObj 更新对象数据
@@ -173,7 +170,7 @@ module.exports.show = function(modelName,id,cb) {
 
 /**
  * 通过主键ID删除对象
- * 
+ *
  * @param  {[type]}   modelName 模型名称
  * @param  {[type]}   id        主键ID
  * @param  {Function} cb        回调函数
@@ -192,7 +189,7 @@ module.exports.destroy = function(modelName,id,cb) {
 
 /**
  * 通过模型名称获取数据库数量
- * 
+ *
  * @param  {[type]}   modelName 模型名称
  * @param  {Function} cb        回调函数
  */
@@ -204,7 +201,7 @@ module.exports.count = function(modelName,cb) {
 
 /**
  * 通过条件判断数据是否存在
- * 
+ *
  * @param  {[type]}   modelName  模块名
  * @param  {[type]}   conditions 条件
  * @param  {Function} cb         回调函数

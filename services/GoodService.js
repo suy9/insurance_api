@@ -36,10 +36,7 @@ function generateGoodInfo(params) {
             info["cat_id"] = cats[2];
         }
 
-        if(params.goods_introduce) {
-            info["goods_introduce"] = params.goods_introduce;
-        }
-
+        info["goods_introduce"] = params.goods_introduce;
         info["add_time"] = Date.parse(new Date()) / 1000;
         info["upd_time"] = Date.parse(new Date()) / 1000;
         info["is_del"] = '0';
@@ -203,7 +200,7 @@ module.exports.getAllGoods = function(params,cb) {
         conditions["offset"] = offset;
         conditions["limit"] = limit;
         conditions["only"] = ["goods_id","goods_name","goods_price","goods_introduce","add_time","upd_time"];
-        conditions["order"] = "-upd_time";
+        conditions["order"] = "-add_time";
 
 
         dao.list("GoodModel",conditions,function(err,goods){
@@ -212,7 +209,7 @@ module.exports.getAllGoods = function(params,cb) {
             resultDta["total"] = count;
             resultDta["pagenum"] = pagenum;
             resultDta["goods"] = _.map(goods,function(good){
-                return _.omit(good,"goods_introduce","is_del","delete_time");
+                return _.omit(good,"is_del","delete_time");
             });
             cb(err,resultDta);
         })

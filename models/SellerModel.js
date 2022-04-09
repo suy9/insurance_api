@@ -4,15 +4,11 @@ module.exports = function (db, callback) {
         seller_id: {type: 'serial', key: true},
         seller_num: String,
         seller_name: String,
-        seller_birthday: String,
+        seller_birthday: Date,
         seller_address: String,
         seller_phone: Number,
-        username: String,
-        password: String,
         seller_email: String,
         seller_sex: ['男', '女'],
-        seller_qq: String,
-        seller_edu: ['博士', '硕士', '本科', '专科', '高中', '初中', '小学','无'],
         create_time: Number,
         update_time: Number
     }, {

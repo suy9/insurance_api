@@ -43,7 +43,6 @@ module.exports.getAllManagers = function (conditions, cb) {
                 if (!manager.role_id) {
                     role_name = "超级管理员"
                 }
-                console.log(managers);
                 retManagers.push({
                     "id": manager.mg_id,
                     "role_name": role_name,
@@ -57,7 +56,7 @@ module.exports.getAllManagers = function (conditions, cb) {
             var resultDta = {};
             resultDta["total"] = count;
             resultDta["pagenum"] = pagenum;
-            resultDta["managers"] = retManagers;
+            resultDta["users"] = retManagers;
             cb(err, resultDta);
         });
     });
@@ -104,7 +103,7 @@ module.exports.createManager = function (params, cb) {
 /**
  * 更新管理员信息
  *
- * @param  {*}   params 管理员信息
+ * @param  {[type]}   params 管理员信息
  * @param  {Function} cb     回调函数
  */
 module.exports.updateManager = function (params, cb) {
@@ -210,7 +209,6 @@ module.exports.updateMgrState = function (id, state, cb) {
 /**
  * 管理员登录
  * @param  {[type]}   username 用户名
- * @param  {[type]}   password 密码
  * @param  {[type]}   password 密码
  * @param  {Function} cb       回调
  */

@@ -104,8 +104,8 @@ module.exports.createOrder = function (params, cb) {
             if (err) return cb(err);
             result = {
                 "id": order.id,
-                "user_id": order.user_id,
-                "seller_id": order.seller_id,
+                "user_num": order.user_num,
+                "seller_num": order.seller_num,
                 "order_kind": order.order_kind,
                 "order_number": order.order_number,
                 "order_price": order.order_price,

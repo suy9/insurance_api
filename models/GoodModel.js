@@ -9,16 +9,15 @@ module.exports = function(db,callback){
 		is_del : ['0','1'],	// 0: 正常 , 1: 删除
 		add_time : Date,
 		upd_time : Date,
-		delete_time : Number,
+		delete_time : Date,
 		cat_one_id : Number,
 		cat_two_id : Number,
-		cat_three_id : Number,
 		goods_state : Number	// 0：未审核 1: 审核中 2: 已审核
 	},{
 		table : "sp_goods",
 		methods: {
 		getGoodsCat: function () {
-			return this.cat_one_id + ',' + this.cat_two_id + ',' + this.cat_three_id;
+			return this.cat_one_id + ',' + this.cat_two_id;
 		}
 	}
 	});

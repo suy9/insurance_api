@@ -5,13 +5,13 @@ var permissionAPIDAO = require(path.join(process.cwd(),"dao/PermissionAPIDAO"));
 
 /**
  * 获取左侧菜单数据
- * 
+ *
  * @param  {Function} cb 回调函数
  */
 module.exports.getLeftMenus = function(userInfo,cb) {
 	if(!userInfo) return cb("无权限访问");
 
-	
+
 
 	var authFn = function(rid,keyRolePermissions,cb) {
 		permissionAPIDAO.list(function(err,permissions){
@@ -22,7 +22,7 @@ module.exports.getLeftMenus = function(userInfo,cb) {
 			for(idx in permissions) {
 
 				permission = permissions[idx];
-				
+
 				if(permission.ps_level == 0) {
 					if(rid != 0) {
 						if(!keyRolePermissions[permission.ps_id]) continue;;
@@ -74,8 +74,8 @@ module.exports.getLeftMenus = function(userInfo,cb) {
 	} else {
 		dao.show("RoleModel",userInfo.rid,function(err,role){
 			if(err || !role) return cb("无权限访问");
-			
-			
+
+
 			rolePermissions = role.ps_ids.split(",")
 			keyRolePermissions = {}
 			for(idx in rolePermissions) {
@@ -83,8 +83,8 @@ module.exports.getLeftMenus = function(userInfo,cb) {
 			}
 
 			authFn(rid,keyRolePermissions,cb);
-			
+
 		})
 	}
-	
+
 }

@@ -31,7 +31,6 @@ router.get("/",
 				res.sendResult(result,200,"获取管理员列表成功");
 			}
 		)(req,res,next);
-
 	}
 );
 
@@ -39,7 +38,6 @@ router.get("/",
 router.get("/:id",
 	// 参数验证
 	function(req,res,next) {
-		console.log(req.params)
 		if(!req.params.id) {
 			return res.sendResult(null,400,"用户ID不能为空");
 		}
@@ -74,11 +72,11 @@ router.post("/",
 	// 处理业务逻辑
 	function(req,res,next) {
 		params = {
-			username:req.body.username,
-			password:req.body.password,
-			mobile:req.body.mobile,
-			email:req.body.email,
-			rid:req.body.rid
+			"username":req.body.username,
+			"password":req.body.password,
+			"mobile":req.body.mobile,
+			"email":req.body.email,
+			"rid":req.body.rid
 		}
 		mgrServ.createManager(params,function(err,manager){
 			if(err) return res.sendResult(null,400,err);
@@ -86,7 +84,6 @@ router.post("/",
 		})(req,res,next);
 	}
 );
-
 
 // 修改用户信息
 router.put("/:id",

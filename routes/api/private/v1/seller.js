@@ -28,7 +28,7 @@ router.get("/",
             },
             function(err,result){
                 if(err) return res.sendResult(null,400,err);
-                res.sendResult(result,200,"获取被投保人列表成功");
+                res.sendResult(result,200,"获取用户列表成功");
             }
         )(req,res,next);
 
@@ -39,7 +39,6 @@ router.get("/",
 router.get("/:id",
     // 参数验证
     function(req,res,next) {
-    console.log(req.params)
         if(!req.params.id) {
             return res.sendResult(null,400,"被投保人ID不能为空");
         }
@@ -59,7 +58,7 @@ router.post("/",
     // 验证参数
     function(req,res,next) {
         if(!req.body.seller_name){
-            return res.sendResult(null,400,"被投保人名不能为空");
+            return res.sendResult(null,400,"投保人姓名不能为空");
         }
         if(!req.body.seller_sex) {
             return res.sendResult(null,400,"性别不能为空");
@@ -67,7 +66,6 @@ router.post("/",
         if(!req.body.seller_num) {
             return res.sendResult(null,400,"身份证号不能为空");
         }
-
         next();
     },
     // 处理业务逻辑
@@ -103,7 +101,7 @@ router.put("/:id",
     function(req,res,next) {
         sellerServ.updateSeller(
             {
-                "seller_id":req.body.seller_id,
+                "id":req.params.id,
                 "seller_email":req.body.seller_email,
                 "seller_phone":req.body.seller_phone,
                 "seller_address":req.body.seller_address
@@ -133,33 +131,5 @@ router.delete("/:id",
         })(req,res,next);
     }
 );
-
-
-/*router.put("/:id/state/:state",
-    // 参数验证
-    function(req,res,next) {
-        if(!req.params.id) {
-            return res.sendResult(null,400,"用户ID不能为空");
-        }
-        if(isNaN(parseInt(req.params.id))) return res.sendResult(null,400,"用户ID必须是数字");
-
-        // // // if(!req.params.state) {
-        // // // 	return res.sendResult(null,400,"状态不能为空");
-        // // // }
-        // // if(isNaN(parseInt(req.params.state))) return res.sendResult(null,400,"状态必须是数字");
-        // if(parseInt(req.params.state) != 0 && parseInt(req.params.state) != 1) return res.sendResult(null,400,"管理状态只能为0或1");
-
-        next();
-    },
-    // 处理业务逻辑
-    function(req,res,next) {
-        state = 0
-        if(req.params.state && req.params.state == "true") state = 1
-        sellerServ.updateMgrState(req.params.id,state,function(err,manager){
-            if(err) return res.sendResult(null,400,err);
-            res.sendResult(manager,200,"设置状态成功");
-        })(req,res,next);
-    }
-)*/
 
 module.exports = router;

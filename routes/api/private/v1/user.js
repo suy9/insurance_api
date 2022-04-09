@@ -39,8 +39,7 @@ router.get("/",
 router.get("/:id",
     // 参数验证
     function(req,res,next) {
-    console.log(req.params)
-    if(!req.params.id) {
+        if(!req.params.id) {
             return res.sendResult(null,400,"投保人ID不能为空");
         }
         if(isNaN(parseInt(req.params.id))) return res.sendResult(null,400,"投保人ID必须是数字");
@@ -67,7 +66,6 @@ router.post("/",
         if(!req.body.user_num) {
             return res.sendResult(null,400,"身份证号不能为空");
         }
-
         next();
     },
     // 处理业务逻辑
@@ -79,7 +77,7 @@ router.post("/",
             "user_email":req.body.user_email,
             "user_phone":req.body.user_phone,
             "user_birthday":req.body.user_birthday,
-            "user_address":req.body.user_address
+            "user_address":req.body.user_address,
         }
         userServ.createUser(params,function(err,user){
             if(err) return res.sendResult(null,400,err);
@@ -103,9 +101,9 @@ router.put("/:id",
     function(req,res,next) {
         userServ.updateUser(
             {
-                "user_id":req.body.user_id,
-                "user_email":req.body.user_email,
+                "id":req.params.id,
                 "user_phone":req.body.user_phone,
+                "user_email":req.body.user_email,
                 "user_address":req.body.user_address
             },
             function(err,user) {
@@ -122,7 +120,7 @@ router.delete("/:id",
     function(req,res,next){
         if(!req.params.id) return res.sendResult(null,400,"用户ID不能为空");
         if(isNaN(parseInt(req.params.id))) return res.sendResult(null,400,"ID必须是数字");
-        //if(req.params.user_id === 500) return res.sendResult(null,400,"不允许删除admin账户");
+        if(req.params.id == 500) return res.sendResult(null,400,"不允许删除admin账户");
         next();
     },
     // 处理业务逻辑
@@ -133,33 +131,5 @@ router.delete("/:id",
         })(req,res,next);
     }
 );
-
-
-/*router.put("/:id/state/:state",
-    // 参数验证
-    function(req,res,next) {
-        if(!req.params.id) {
-            return res.sendResult(null,400,"用户ID不能为空");
-        }
-        if(isNaN(parseInt(req.params.id))) return res.sendResult(null,400,"用户ID必须是数字");
-
-        // // // if(!req.params.state) {
-        // // // 	return res.sendResult(null,400,"状态不能为空");
-        // // // }
-        // // if(isNaN(parseInt(req.params.state))) return res.sendResult(null,400,"状态必须是数字");
-        // if(parseInt(req.params.state) != 0 && parseInt(req.params.state) != 1) return res.sendResult(null,400,"管理状态只能为0或1");
-
-        next();
-    },
-    // 处理业务逻辑
-    function(req,res,next) {
-        state = 0
-        if(req.params.state && req.params.state == "true") state = 1
-        userServ.updateMgrState(req.params.id,state,function(err,manager){
-            if(err) return res.sendResult(null,400,err);
-            res.sendResult(manager,200,"设置状态成功");
-        })(req,res,next);
-    }
-)*/
 
 module.exports = router;
