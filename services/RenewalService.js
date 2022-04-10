@@ -27,7 +27,7 @@ module.exports.getAllRenewals = function (conditions, cb) {
         pageCount = Math.ceil(count / pagesize);
         console.log("pageCount", pageCount);
 
-        if (pagenum > pageCount) return cb("页数超出范围");
+        if (pageCount&&(pagenum > pageCount)) return cb("页数超出范围");
         offset = (pagenum - 1) * pagesize;
         if (offset >= count) {
             offset = count;

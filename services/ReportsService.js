@@ -20,7 +20,7 @@ module.exports.getReports = function(conditions, cb) {
 	if(!conditions.pagenum)return cb(new Error("pagenum is required"));
 	if(!conditions.pagesize)return cb(new Error("pagesize is required"));
 
-	reportDAO.countreportsByKey(conditions["startDate"],conditions["endDate"], function(err, count) {
+	reportDAO.countreportsByKey(conditions["query"], conditions["startDate"],conditions["endDate"], function(err, count) {
 		pagenum = parseInt(conditions["pagenum"]);
 		pagesize = parseInt(conditions["pagesize"]);
 
@@ -31,7 +31,7 @@ module.exports.getReports = function(conditions, cb) {
 		}
 		limit = pagesize;
 
-		reportDAO.findreportByKey(conditions["startDate"],conditions["endDate"],offset, limit, function (err, reports) {
+		reportDAO.findreportByKey(conditions["query"], conditions["startDate"],conditions["endDate"],offset, limit, function (err, reports) {
 			var retReports = [];
 			for (idx in reports) {
 				var report = reports[idx];
@@ -48,7 +48,7 @@ module.exports.getReports = function(conditions, cb) {
 					"seller_birthday": report.seller_birthday,
 					"seller_phone": report.seller_phone,
 					"seller_address": report.seller_address,
-					"order_kind": report,
+					"order_kind": report.order_kind,
 					"order_number": report.order_number,
 					"order_price": report.order_price,
 					"order_pay": report.order_pay,
@@ -62,6 +62,7 @@ module.exports.getReports = function(conditions, cb) {
 			resultDta["total"] = count;
 			resultDta["pagenum"] = pagenum;
 			resultDta["reports"] = retReports;
+			console.log('resultDta',resultDta);
 			cb(err, resultDta);
 		});
 	});

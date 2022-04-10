@@ -5,5 +5,5 @@ package-lock.json
 tmp_uploads/
 uploads/
 cheese.log
-db/mydb1.sql
+db/mydb.sql
 cheese.log

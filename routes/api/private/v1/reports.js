@@ -22,6 +22,7 @@ router.get("/",
     function (req, res, next) {
         // 获取用户列表
         repServ.getReports({
+            "query":req.query.query,
             "startDate":req.query.startDate,
             "endDate":req.query.endDate,
             "pagenum":req.query.pagenum,
@@ -31,6 +32,7 @@ router.get("/",
             if(err) return res.sendResult(null,400,err);
             res.sendResult(result,200,"获取数据列表成功");
             console.log(result);
+            console.log("this is a test");
         }
         )(req,res,next);
     }
