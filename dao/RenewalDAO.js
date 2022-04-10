@@ -44,8 +44,7 @@ module.exports.findOne = function (conditions, cb) {
  * @param  {Function} cb     回调函数
  */
 
-module.exports.findOrderByKey = function (key, offset, limit, cb) {
-    console.log(key, offset, limit);
+module.exports.findReportByKey = function (key, offset, limit, cb) {
     db = databaseModule.getDatabase();
     sql = "SELECT sp_order.*,sp_user.user_name,sp_user.user_num,sp_user.user_birthday,sp_user.user_address,sp_user.user_phone,sp_seller.seller_name,sp_seller.seller_num,sp_seller.seller_birthday,sp_seller.seller_address,sp_seller.seller_phone  " +
         "FROM sp_order,sp_user,sp_seller " +

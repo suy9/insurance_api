@@ -18,20 +18,23 @@ module.exports.getAllRenewals = function (conditions, cb) {
 
     if (!conditions.pagenum) return cb("pagenum 参数不合法");
     if (!conditions.pagesize) return cb("pagesize 参数不合法");
-
+    console.log("conditions", conditions);
     RenewalDAO.countOrderByKey(conditions["query"], function (err, count) {
         key = conditions["query"];
         pagenum = parseInt(conditions["pagenum"]);
         pagesize = parseInt(conditions["pagesize"]);
 
         pageCount = Math.ceil(count / pagesize);
+        console.log("pageCount", pageCount);
+
         if (pagenum > pageCount) return cb("页数超出范围");
         offset = (pagenum - 1) * pagesize;
         if (offset >= count) {
             offset = count;
         }
         limit = pagesize;
-        RenewalDAO.findOrderByKey(key, offset, limit, function (err, orders) {
+
+        RenewalDAO.findReportByKey(key, offset, limit, function (err, orders) {
             var retOrders = [];
             for (idx in orders) {
                 var order = orders[idx];
@@ -127,10 +130,13 @@ module.exports.createRenewal = function (params, cb) {
  * @param  {Function} cb     回调函数
  */
 module.exports.updateRenewal = function (params, cb) {
+    console.log("this is updateRenewal");
+    console.log(params);
     RenewalDAO.update(
         {
-            "order_id": params.order_id,
+            "order_id": params.id,
             "next_pay_time": params.next_pay_time,
+            "pay_status": '0'
         },
         function (err, order) {
             if (err) return cb(err);
@@ -138,6 +144,7 @@ module.exports.updateRenewal = function (params, cb) {
                 null,
                 {
                     "id": order.id,
+                    "pay_status": order.pay_status,
                     "next_pay_time": order.next_pay_time,
                 });
         }

@@ -74,13 +74,13 @@ router.put("/:id",
         if (!req.params.id) return res.sendResult(null, 400, "保单id不能为空");
         if(isNaN(parseInt(req.params.id))) return res.sendResult(null, 400, "保单id必须为数字");
         next();
-        console.log(req.body);
     },
     // 业务逻辑
     function (req, res, next) {
         params = {
             "id": req.params.id,
-            "next_pay_time": req.body.next_pay_time
+            "next_pay_time":  (parseInt(req.body.next_pay_time.substring(0, 4))+1).toString() + req.body.next_pay_time.substring(4, 10),
+            "pay_status": 0
         }
         renewalServ.updateRenewal(params, function (err, result) {
                 if (err) return res.sendResult(null, 400, err);
