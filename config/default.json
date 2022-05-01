@@ -14,7 +14,7 @@
 		"host" : "127.0.0.1",
 		"database" : "mydb",
 		"user" : "root",
-		"password" : "Uniosuy9",
+		"password" : "ROOT",
 		"port" : 3306
 	}
 }
